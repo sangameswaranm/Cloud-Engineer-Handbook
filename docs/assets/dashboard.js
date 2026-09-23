@@ -3,7 +3,8 @@
   const root = document.getElementById("ceh-dash");
   if (!root) return;
 
-  const TZ = "Asia/Kolkata";
+  const TZ = "Asia/Riyadh";
+  const REPO = "https://github.com/sangameswaranm/Cloud-Engineer-Handbook";
   const $ = (id) => document.getElementById(id);
   const el = (tag, cls, text) => {
     const e = document.createElement(tag);
@@ -20,16 +21,101 @@
   function tick() {
     const n = new Date();
     $("ceh-time").textContent = fTime.format(n);
-    $("ceh-date").textContent = fDate.format(n) + " · IST";
+    $("ceh-date").textContent = fDate.format(n) + " · KSA (UTC+3)";
   }
   tick();
   setInterval(tick, 1000);
 
   // ---- date helpers (dates stored as YYYY-MM-DD, IST calendar days) ----
-  const todayIST = () => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(new Date()); // YYYY-MM-DD
+  const ymdKSA = (d) => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(d); // YYYY-MM-DD
+  const hmKSA = (d) => new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).format(d);
+  const todayIST = () => ymdKSA(new Date());
   const toUTC = (ymd) => { const [y, m, d] = ymd.split("-").map(Number); return Date.UTC(y, m - 1, d); };
   const mondayOf = (ymd) => { const t = toUTC(ymd); const dow = (new Date(t).getUTCDay() + 6) % 7; return t - dow * 86400000; };
   const fmtShort = (t) => new Date(t).toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "UTC" });
+
+
+  // ---- session timer (state kept in this browser; nothing is saved to GitHub until you submit the form) ----
+  const KEY = "ceh-timer-v1";
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } };
+  const save = (st) => { try { st ? localStorage.setItem(KEY, JSON.stringify(st)) : localStorage.removeItem(KEY); } catch (e) {} };
+  let st = load(); // {startedAt, accMs, runSince, endedAt}
+  const elapsedMs = () => !st ? 0 : st.accMs + (st.runSince ? Date.now() - st.runSince : 0);
+  const pad = (n) => String(n).padStart(2, "0");
+  const fmtDur = (ms) => { const s = Math.floor(ms / 1000); return pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(s % 60); };
+  const baseTitle = document.title;
+
+  function paintTimer() {
+    const ms = elapsedMs();
+    $("ceh-telapsed").textContent = fmtDur(ms);
+    const running = st && st.runSince && !st.endedAt, paused = st && !st.runSince && !st.endedAt, ended = st && st.endedAt;
+    $("ceh-tstate").textContent = !st ? "No session running" : ended ? "Session ended — log it below"
+      : (running ? "Running since " : "Paused · started ") + hmKSA(new Date(st.startedAt)) + " KSA";
+    $("ceh-start").hidden = !!st;
+    $("ceh-pause").hidden = !st || !!ended;
+    $("ceh-pause").textContent = paused ? "Resume" : "Pause";
+    $("ceh-end").hidden = !st || !!ended;
+    $("ceh-discard").hidden = !st;
+    $("ceh-logform").hidden = !ended;
+    $("ceh-timer").classList.toggle("ceh-running", !!running);
+    document.title = running ? "⏱ " + fmtDur(ms) + " · " + baseTitle : baseTitle;
+  }
+  $("ceh-start").onclick = () => { const n = Date.now(); st = { startedAt: n, accMs: 0, runSince: n, endedAt: null }; save(st); paintTimer(); };
+  $("ceh-pause").onclick = () => {
+    if (st.runSince) { st.accMs += Date.now() - st.runSince; st.runSince = null; } else { st.runSince = Date.now(); }
+    save(st); paintTimer();
+  };
+  $("ceh-end").onclick = () => {
+    if (st.runSince) { st.accMs += Date.now() - st.runSince; st.runSince = null; }
+    st.endedAt = Date.now(); save(st); fillForm(); paintTimer();
+  };
+  $("ceh-discard").onclick = () => { if (confirm("Discard this session? Its time will not be logged.")) { st = null; save(st); paintTimer(); } };
+  $("ceh-clear").onclick = () => { if (confirm("Clear the timer? Only do this after the GitHub form was submitted.")) { st = null; save(st); paintTimer(); } };
+  setInterval(paintTimer, 1000);
+  paintTimer();
+
+  let formCtx = null;
+  const CATS = ["theory", "lab", "troubleshooting", "project"];
+  function totalMin() { return st ? Math.max(1, Math.round(elapsedMs() / 60000)) : 0; }
+  function updSum() {
+    const sum = CATS.reduce((a, c) => a + (Number($("ceh-fm-" + c).value) || 0), 0);
+    $("ceh-fsum").textContent = "Split total: " + sum + " of " + totalMin() + " min" + (sum !== totalMin() ? " — check the split" : " ✓");
+  }
+  function fillForm() {
+    if (!formCtx || !st || !st.endedAt) return;
+    const { p, sessions } = formCtx;
+    $("ceh-ftotal").textContent = totalMin();
+    const saved = st.form || {};
+    const n = new Set(sessions.map((x) => x.issue || (x.session + "|" + x.date))).size + 1;
+    $("ceh-fsession").value = saved.session || "S" + pad(n);
+    const sel = $("ceh-fdomain"); sel.innerHTML = "";
+    (p.domains || []).forEach((d) => { const o = el("option", null, d.name); o.value = d.name; sel.appendChild(o); });
+    const next = (p.current && p.current.next_session) || "";
+    sel.value = saved.domain || ((p.domains || []).find((d) => next.toLowerCase().includes(d.name.toLowerCase())) || (p.domains || [])[0] || {}).name || "";
+    $("ceh-ftopic").value = saved.topic || next.replace(/^Session\s*\d+\s*[—-]\s*/i, "");
+    CATS.forEach((c) => { $("ceh-fm-" + c).value = saved[c] != null ? saved[c] : (c === "lab" ? totalMin() : 0); });
+    $("ceh-fresult").value = saved.result || "";
+    updSum();
+  }
+  function setupLogForm(p, sessions) {
+    formCtx = { p, sessions };
+    CATS.forEach((c) => $("ceh-fm-" + c).addEventListener("input", updSum));
+    fillForm();
+  }
+  $("ceh-submit").onclick = () => {
+    const f = { session: $("ceh-fsession").value.trim(), domain: $("ceh-fdomain").value, topic: $("ceh-ftopic").value.trim(), result: $("ceh-fresult").value.trim() };
+    CATS.forEach((c) => { f[c] = Number($("ceh-fm-" + c).value) || 0; });
+    if (!f.topic) { alert("Add a topic first."); return; }
+    if (!CATS.some((c) => f[c] > 0)) { alert("Put the minutes into at least one category."); return; }
+    st.form = f; save(st);
+    const start = new Date(st.startedAt), end = new Date(st.endedAt);
+    const q = new URLSearchParams({
+      template: "log-session.yml", title: "Session log: " + f.session + " · " + f.domain + " · " + ymdKSA(start),
+      date: ymdKSA(start), start: hmKSA(start), end: hmKSA(end), session: f.session, domain: f.domain, topic: f.topic,
+      theory: f.theory, lab: f.lab, troubleshooting: f.troubleshooting, project: f.project, result: f.result,
+    });
+    window.open(REPO + "/issues/new?" + q.toString(), "_blank", "noopener");
+  };
 
   // ---- load data ----
   const base = new URL("../data/", location.href);
@@ -56,7 +142,8 @@
     const total = sessions.reduce((a, x) => a + (Number(x.minutes) || 0), 0);
     const thisMon = mondayOf(todayIST());
     const weekMin = sessions.filter((x) => x.date && mondayOf(x.date) === thisMon).reduce((a, x) => a + (Number(x.minutes) || 0), 0);
-    const sessionIds = new Set(sessions.map((x) => x.session || x.date));
+    const sKey = (x) => x.issue || (x.session + "|" + x.date);
+    const sessionIds = new Set(sessions.map(sKey));
     const started = (p.domains || []).filter((d) => d.status && d.status !== "Not Started").length;
     $("ceh-total").textContent = hrs(total);
     $("ceh-week").textContent = hrs(weekMin);
@@ -114,15 +201,18 @@
       });
     });
 
-    // recent sessions
+    // recent sessions (entries grouped per logged session)
     const rec = $("ceh-recent");
-    const recent = sessions.slice().sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 5);
+    const groups = new Map();
+    sessions.forEach((x) => { const k = sKey(x); if (!groups.has(k)) groups.set(k, { ...x, parts: [] }); groups.get(k).parts.push(x); });
+    const recent = [...groups.values()].sort((a, b) => (String(b.date) + (b.start || "")).localeCompare(String(a.date) + (a.start || ""))).slice(0, 5);
     if (!recent.length) rec.appendChild(el("p", "ceh-empty", "No sessions logged yet."));
-    recent.forEach((x) => {
+    recent.forEach((g) => {
+      const tot = g.parts.reduce((a, x) => a + (Number(x.minutes) || 0), 0);
       const it = el("div", "ceh-sess");
-      it.appendChild(el("div", "ceh-sess-top", [x.date, x.session, x.domain].filter(Boolean).join(" · ")));
-      it.appendChild(el("div", "ceh-sess-topic", (x.topic || "") + " — " + hrs(Number(x.minutes) || 0) + " h " + (x.category || "")));
-      if (x.result) it.appendChild(el("div", "ceh-sess-res", x.result));
+      it.appendChild(el("div", "ceh-sess-top", [g.date, g.start && g.end ? g.start + "–" + g.end : "", g.session, g.domain].filter(Boolean).join(" · ")));
+      it.appendChild(el("div", "ceh-sess-topic", (g.topic || "") + " — " + hrs(tot) + " h"));
+      it.appendChild(el("div", "ceh-sess-res", g.parts.map((x) => x.category + " " + x.minutes + "m").join(" · ") + (g.result ? " — " + g.result : "")));
       rec.appendChild(it);
     });
 
@@ -132,6 +222,7 @@
     if (!wa.length) weak.appendChild(el("p", "ceh-empty", "None recorded yet — added only from real lab and assessment results."));
     else { const ul = el("ul"); wa.forEach((w) => ul.appendChild(el("li", null, typeof w === "string" ? w : w.area + (w.note ? " — " + w.note : "")))); weak.appendChild(ul); }
 
+    setupLogForm(p, sessions);
     $("ceh-foot").textContent = "Data last updated: " + (p.updated || "unknown") + " · Statuses change only with evidence.";
   }
 })();

@@ -1,0 +1,48 @@
+name: Log study session
+description: Adds a study session to the dashboard (normally opened by the dashboard timer).
+title: "Session log"
+labels: ["session-log"]
+body:
+  - type: markdown
+    attributes:
+      value: "Filled automatically by the dashboard timer. Check the numbers, then press **Submit**. This repo is public, so keep notes sanitized."
+  - type: input
+    id: date
+    attributes: {label: Date, description: "YYYY-MM-DD (KSA)"}
+    validations: {required: true}
+  - type: input
+    id: start
+    attributes: {label: Start (KSA), description: "HH:MM"}
+  - type: input
+    id: end
+    attributes: {label: End (KSA), description: "HH:MM"}
+  - type: input
+    id: session
+    attributes: {label: Session, description: "e.g. S01"}
+    validations: {required: true}
+  - type: input
+    id: domain
+    attributes: {label: Domain, description: "Must match a domain on the dashboard, e.g. Linux"}
+    validations: {required: true}
+  - type: input
+    id: topic
+    attributes: {label: Topic}
+    validations: {required: true}
+  - type: input
+    id: theory
+    attributes: {label: Theory minutes}
+  - type: input
+    id: lab
+    attributes: {label: Lab minutes}
+  - type: input
+    id: troubleshooting
+    attributes: {label: Troubleshooting minutes}
+  - type: input
+    id: project
+    attributes: {label: Project minutes}
+  - type: input
+    id: result
+    attributes: {label: Result, description: "One line. Status changes are made separately, from evidence."}
+  - type: textarea
+    id: notes
+    attributes: {label: Notes, description: "Optional. No client names, hostnames, IPs or ticket numbers."}

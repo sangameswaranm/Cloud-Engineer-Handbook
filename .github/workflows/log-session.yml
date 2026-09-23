@@ -1,0 +1,52 @@
+name: Log session
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+jobs:
+  log:
+    # Public repo: only the owner's session issues are processed.
+    if: contains(github.event.issue.labels.*.name, 'session-log') && github.event.issue.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    outputs:
+      ok: ${{ steps.parse.outputs.ok }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: parse
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: python3 scripts/log_session.py
+      - if: steps.parse.outputs.ok == 'true'
+        env:
+          N: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "session-logger"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/sessions.json
+          git commit -m "log: session from issue #$N"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ github.event.issue.number }}
+          OK: ${{ steps.parse.outputs.ok }}
+          MSG: ${{ steps.parse.outputs.message }}
+        run: |
+          if [ "$OK" = "true" ]; then
+            gh issue comment "$N" --repo "$GITHUB_REPOSITORY" --body "✅ $MSG The dashboard updates in about a minute."
+            gh issue close "$N" --repo "$GITHUB_REPOSITORY"
+          else
+            gh issue comment "$N" --repo "$GITHUB_REPOSITORY" --body "❌ Not logged: $MSG Edit nothing here; open a new session log from the dashboard."
+          fi
+
+  publish:
+    needs: log
+    if: needs.log.outputs.ok == 'true'
+    uses: ./.github/workflows/publish.yml

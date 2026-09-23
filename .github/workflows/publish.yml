@@ -4,22 +4,23 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages-build
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main          # always build the latest main (includes just-logged sessions)
           fetch-depth: 0   # full history so each page gets its real "last updated" time
       - uses: actions/setup-python@v5
         with:

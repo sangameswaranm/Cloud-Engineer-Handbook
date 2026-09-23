@@ -26,7 +26,7 @@ plugins:
   - search
   - git-revision-date-localized:
       type: datetime
-      timezone: Asia/Kolkata
+      timezone: Asia/Riyadh
       enable_creation_date: false
       fallback_to_build_date: true
 

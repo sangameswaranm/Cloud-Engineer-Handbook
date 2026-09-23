@@ -41,3 +41,16 @@
 .ceh-sess-res { font-size: .7rem; }
 .ceh-empty { color: var(--ceh-muted); font-style: italic; }
 .ceh-foot { color: var(--ceh-muted); font-size: .65rem; margin-top: 1.5rem; }
+.ceh-timer { margin: 1rem 0; padding: 1rem; border-radius: 12px; background: var(--ceh-card); text-align: center; border: 2px solid transparent; }
+.ceh-timer.ceh-running { border-color: var(--md-accent-fg-color); }
+.ceh-telapsed { font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; margin: .2rem 0 .6rem; }
+.ceh-tlabel { color: var(--ceh-muted); font-size: .75rem; margin: .2rem 0; }
+.ceh-tbtns { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+.ceh-tbtns .md-button { margin: 0; }
+.ceh-danger { color: #c62828 !important; border-color: #c62828 !important; }
+.ceh-logform { text-align: left; margin-top: 1rem; }
+.ceh-logform label { display: block; font-size: .72rem; margin: .45rem 0; }
+.ceh-logform input, .ceh-logform select { display: block; width: 100%; box-sizing: border-box; padding: .45rem; margin-top: .2rem; font: inherit; font-size: .8rem;
+  color: var(--md-default-fg-color); background: var(--md-default-bg-color); border: 1px solid var(--ceh-line); border-radius: 6px; }
+.ceh-fsplit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .6rem; }
+.ceh [hidden] { display: none !important; }
