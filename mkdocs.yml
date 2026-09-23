@@ -1,0 +1,85 @@
+site_name: Cloud Engineer Handbook
+site_description: Senior Cloud Engineer learning journey — labs, troubleshooting, projects
+site_url: https://sangameswaranm.github.io/Cloud-Engineer-Handbook/
+repo_url: https://github.com/sangameswaranm/Cloud-Engineer-Handbook
+repo_name: Cloud-Engineer-Handbook
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle: {icon: material/weather-night, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle: {icon: material/weather-sunny, name: Light mode}
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: datetime
+      timezone: Asia/Kolkata
+      enable_creation_date: false
+      fallback_to_build_date: true
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Program:
+      - Roadmap: ROADMAP.md
+      - Progress: PROGRESS.md
+      - Daily Log: DAILY-LOG.md
+      - Decisions: DECISIONS.md
+      - Lab Environment: LAB-ENVIRONMENT.md
+      - Cost Control: COST-CONTROL.md
+  - Topics:
+      - Linux: 01-Linux/README.md
+      - Networking: 02-Networking/README.md
+      - Bash: 03-Bash/README.md
+      - Python: 04-Python/README.md
+      - Storage: 05-Storage/README.md
+      - Database: 06-Database/README.md
+      - IAM / Security: 07-IAM-Security/README.md
+      - OCI: 08-OCI/README.md
+      - Azure: 09-Azure/README.md
+      - Terraform: 10-Terraform/README.md
+      - Docker: 11-Docker/README.md
+      - Kubernetes: 12-Kubernetes/README.md
+      - Monitoring: 13-Monitoring/README.md
+      - Logging: 14-Logging/README.md
+      - CI/CD: 15-CICD/README.md
+      - Backup / DR: 16-Backup-DR/README.md
+      - Automation: 17-Automation/README.md
+      - Architecture: 18-Architecture/README.md
+  - Projects:
+      - 01 Linux Server: projects/01-linux-server/README.md
+      - 02 Network: projects/02-network/README.md
+      - 03 Storage: projects/03-storage/README.md
+      - 04 Database: projects/04-database/README.md
+      - 05 Security: projects/05-security/README.md
+      - 06 OCI: projects/06-oci/README.md
+      - 07 Azure: projects/07-azure/README.md
+      - 08 Terraform: projects/08-terraform/README.md
+      - 09 Docker: projects/09-docker/README.md
+      - 10 Kubernetes: projects/10-kubernetes/README.md
+      - 11 Monitoring: projects/11-monitoring/README.md
+      - 12 CI/CD: projects/12-cicd/README.md
+      - 13 Backup / DR: projects/13-backup-dr/README.md
+      - 14 Multi-Cloud: projects/14-multi-cloud/README.md
+      - 15 Final Enterprise: projects/15-final-enterprise/README.md
+  - References: references/official-documentation.md
