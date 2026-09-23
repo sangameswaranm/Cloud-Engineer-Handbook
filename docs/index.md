@@ -8,6 +8,7 @@ The goal is demonstrable engineering capability, not certificates.
 ## Start here
 
 - [Roadmap](ROADMAP.md): the six-month plan (Month 1 is calibration)
+- [Dashboard](dashboard.md): live clock, hours and status at a glance
 - [Progress](PROGRESS.md): evidence-based status per domain
 - [Daily Log](DAILY-LOG.md): every real study session
 - [Decisions](DECISIONS.md): what was decided and why

@@ -1,0 +1,30 @@
+{
+  "updated": "2026-09-24",
+  "program_start": null,
+  "current": {
+    "month": 1,
+    "week": 1,
+    "next_session": "Session 1 — Linux Fundamentals"
+  },
+  "domains": [
+    {"name": "Linux",        "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Networking",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Bash",         "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Python",       "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Storage",      "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Database",     "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "IAM/Security", "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "OCI",          "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Azure",        "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Terraform",    "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Docker",       "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Kubernetes",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Monitoring",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Logging",      "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "CI/CD",        "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Backup/DR",    "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Automation",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
+    {"name": "Architecture", "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"}
+  ],
+  "weak_areas": []
+}
