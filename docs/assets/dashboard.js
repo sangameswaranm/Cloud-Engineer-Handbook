@@ -109,12 +109,16 @@
     if (!CATS.some((c) => f[c] > 0)) { alert("Put the minutes into at least one category."); return; }
     st.form = f; save(st);
     const start = new Date(st.startedAt), end = new Date(st.endedAt);
-    const q = new URLSearchParams({
-      template: "log-session.yml", title: "Session log: " + f.session + " · " + f.domain + " · " + ymdKSA(start),
-      date: ymdKSA(start), start: hmKSA(start), end: hmKSA(end), session: f.session, domain: f.domain, topic: f.topic,
-      theory: f.theory, lab: f.lab, troubleshooting: f.troubleshooting, project: f.project, result: f.result,
-    });
-    window.open(REPO + "/issues/new?" + q.toString(), "_blank", "noopener");
+    const lines = [
+      ["Date", ymdKSA(start)], ["Start", hmKSA(start)], ["End", hmKSA(end)], ["Session", f.session], ["Domain", f.domain],
+      ["Topic", f.topic], ["Theory minutes", f.theory], ["Lab minutes", f.lab], ["Troubleshooting minutes", f.troubleshooting],
+      ["Project minutes", f.project], ["Result", f.result || "_No response_"],
+    ];
+    const body = lines.map(([k, v]) => "### " + k + "\n\n" + v).join("\n\n") +
+      "\n\n<!-- Sent by the dashboard timer. Press Submit; the logger reads the fields above. Keep it sanitized: public repo. -->";
+    const total = CATS.reduce((a, c) => a + f[c], 0);
+    const q = new URLSearchParams({ title: "Session log: " + f.session + " · " + f.domain + " · " + ymdKSA(start) + " · " + total + " min", body });
+    location.href = REPO + "/issues/new?" + q.toString(); // same tab: less likely to be hijacked by the GitHub app
   };
 
   // ---- load data ----

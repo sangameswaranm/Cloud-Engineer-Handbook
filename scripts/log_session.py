@@ -2,7 +2,7 @@
 Input comes from environment variables (never interpolated into shell)."""
 import json, os, re, sys
 
-body = os.environ.get("ISSUE_BODY", "")
+body = re.sub(r"<!--.*?-->", "", os.environ.get("ISSUE_BODY", "") or "", flags=re.S)
 issue = int(os.environ["ISSUE_NUMBER"])
 path = "docs/data/sessions.json"
 
@@ -15,6 +15,8 @@ for line in body.splitlines():
         fields[cur].append(line)
 val = {k: "\n".join(v).strip() for k, v in fields.items()}
 val = {k: ("" if v == "_No response_" else v) for k, v in val.items()}
+alias = {"start": "Start (KSA)", "end": "End (KSA)"}
+val = {alias.get(k.lower(), k): v for k, v in val.items()}
 
 def fail(msg):
     with open(os.environ["GITHUB_OUTPUT"], "a") as o:
@@ -22,6 +24,8 @@ def fail(msg):
         o.write("message<<EOM\n" + msg + "\nEOM\n")
     print("REJECTED:", msg); sys.exit(0)
 
+if not body.strip():
+    fail("The issue has no text, so there is no session data. This usually means the link opened in the GitHub mobile app, which drops the prefilled text. Open the dashboard link in the browser instead.")
 date = val.get("Date", "")
 if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date): fail(f"Date must be YYYY-MM-DD, got `{date}`.")
 for k in ("Start (KSA)", "End (KSA)"):

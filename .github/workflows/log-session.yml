@@ -2,7 +2,7 @@ name: Log session
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited, reopened]
 
 permissions:
   contents: write
@@ -10,10 +10,14 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: log-${{ github.event.issue.number }}
+
 jobs:
   log:
-    # Public repo: only the owner's session issues are processed.
-    if: contains(github.event.issue.labels.*.name, 'session-log') && github.event.issue.user.login == github.repository_owner
+    # Public repo: only the owner's open "Session log" issues are processed.
+    # Matched by title (not label/template), because mobile apps may drop both.
+    if: startsWith(github.event.issue.title, 'Session log') && github.event.issue.user.login == github.repository_owner && github.event.issue.state == 'open'
     runs-on: ubuntu-latest
     outputs:
       ok: ${{ steps.parse.outputs.ok }}
@@ -39,11 +43,12 @@ jobs:
           OK: ${{ steps.parse.outputs.ok }}
           MSG: ${{ steps.parse.outputs.message }}
         run: |
+          gh issue edit "$N" --repo "$GITHUB_REPOSITORY" --add-label session-log || true
           if [ "$OK" = "true" ]; then
             gh issue comment "$N" --repo "$GITHUB_REPOSITORY" --body "✅ $MSG The dashboard updates in about a minute."
             gh issue close "$N" --repo "$GITHUB_REPOSITORY"
           else
-            gh issue comment "$N" --repo "$GITHUB_REPOSITORY" --body "❌ Not logged: $MSG Edit nothing here; open a new session log from the dashboard."
+            gh issue comment "$N" --repo "$GITHUB_REPOSITORY" --body "❌ Not logged: $MSG Fix it by editing this issue's text, or log again from the dashboard."
           fi
 
   publish:

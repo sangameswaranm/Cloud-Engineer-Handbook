@@ -21,7 +21,7 @@ hide:
       <button id="ceh-discard" class="md-button ceh-danger" hidden>Discard</button>
     </div>
     <div id="ceh-logform" class="ceh-logform" hidden>
-      <p class="ceh-tlabel">Session finished: <b id="ceh-ftotal"></b> min. Split the minutes, then open the GitHub form and press Submit.</p>
+      <p class="ceh-tlabel">Session finished: <b id="ceh-ftotal"></b> min. Split the minutes, then open the GitHub form and press Submit. If your phone offers to open the GitHub app, choose the browser.</p>
       <label>Session <input id="ceh-fsession" maxlength="20"></label>
       <label>Domain <select id="ceh-fdomain"></select></label>
       <label>Topic <input id="ceh-ftopic" maxlength="120"></label>
