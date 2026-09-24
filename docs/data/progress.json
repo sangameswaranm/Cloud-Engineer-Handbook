@@ -7,24 +7,200 @@
     "next_session": "Session 1 — Linux Fundamentals"
   },
   "domains": [
-    {"name": "Linux",        "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Networking",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Bash",         "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Python",       "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Storage",      "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Database",     "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "IAM/Security", "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "OCI",          "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Azure",        "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Terraform",    "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Docker",       "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Kubernetes",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Monitoring",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Logging",      "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "CI/CD",        "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Backup/DR",    "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Automation",   "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"},
-    {"name": "Architecture", "theory": "Not Started", "labs": "Not Started", "troubleshooting": "Not Started", "project": "Not Started", "status": "Not Started"}
+    {
+      "name": "Linux",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 1
+    },
+    {
+      "name": "Networking",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 1
+    },
+    {
+      "name": "Bash",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 1
+    },
+    {
+      "name": "Python",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 2
+    },
+    {
+      "name": "Storage",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 2
+    },
+    {
+      "name": "Database",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 2
+    },
+    {
+      "name": "IAM/Security",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 2
+    },
+    {
+      "name": "OCI",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 1
+    },
+    {
+      "name": "Azure",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 3
+    },
+    {
+      "name": "Terraform",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 4
+    },
+    {
+      "name": "Docker",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 4
+    },
+    {
+      "name": "Kubernetes",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 4
+    },
+    {
+      "name": "Monitoring",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 5
+    },
+    {
+      "name": "Logging",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 5
+    },
+    {
+      "name": "CI/CD",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 5
+    },
+    {
+      "name": "Backup/DR",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 5
+    },
+    {
+      "name": "Automation",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 6
+    },
+    {
+      "name": "Architecture",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 6
+    }
   ],
-  "weak_areas": []
+  "weak_areas": [],
+  "months": [
+    {
+      "n": 1,
+      "title": "Calibration",
+      "focus": "Linux, networking, Bash, OCI networking"
+    },
+    {
+      "n": 2,
+      "title": "Platform basics",
+      "focus": "Storage, databases, IAM & security"
+    },
+    {
+      "n": 3,
+      "title": "OCI, then Azure",
+      "focus": "OCI deep dive, recreate in Azure"
+    },
+    {
+      "n": 4,
+      "title": "Build as code",
+      "focus": "Terraform, Docker, Kubernetes"
+    },
+    {
+      "n": 5,
+      "title": "Operate",
+      "focus": "Monitoring, logging, CI/CD, backup & DR"
+    },
+    {
+      "n": 6,
+      "title": "Architect",
+      "focus": "Integration, final platform, handover"
+    }
+  ]
 }

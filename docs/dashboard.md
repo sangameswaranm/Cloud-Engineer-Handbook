@@ -1,68 +1,81 @@
 ---
 hide:
   - toc
+  - navigation
 ---
 
-# Dashboard
-
 <div id="ceh-dash" class="ceh">
-  <div class="ceh-clock">
-    <div id="ceh-time" class="ceh-time">--:--:--</div>
-    <div id="ceh-date" class="ceh-date">Loading…</div>
-  </div>
 
-  <div id="ceh-timer" class="ceh-timer">
-    <div class="ceh-tlabel" id="ceh-tstate">No session running</div>
-    <div class="ceh-telapsed" id="ceh-telapsed">00:00:00</div>
-    <div class="ceh-tbtns">
-      <button id="ceh-start" class="md-button md-button--primary">Start session</button>
-      <button id="ceh-pause" class="md-button" hidden>Pause</button>
-      <button id="ceh-end" class="md-button md-button--primary" hidden>End session</button>
-      <button id="ceh-discard" class="md-button ceh-danger" hidden>Discard</button>
+  <div class="ceh-top">
+    <div>
+      <h1 class="ceh-h1">Dashboard</h1>
+      <p class="ceh-sub">Where the program stands, from logged sessions and evidence.</p>
     </div>
-    <div id="ceh-logform" class="ceh-logform" hidden>
-      <p class="ceh-tlabel">Session finished: <b id="ceh-ftotal"></b> min. Split the minutes, then open the GitHub form and press Submit. If your phone offers to open the GitHub app, choose the browser.</p>
-      <label>Session <input id="ceh-fsession" maxlength="20"></label>
-      <label>Domain <select id="ceh-fdomain"></select></label>
-      <label>Topic <input id="ceh-ftopic" maxlength="120"></label>
-      <div class="ceh-fsplit">
-        <label>Theory <input id="ceh-fm-theory" type="number" min="0" max="600" inputmode="numeric"></label>
-        <label>Lab <input id="ceh-fm-lab" type="number" min="0" max="600" inputmode="numeric"></label>
-        <label>Troubleshooting <input id="ceh-fm-troubleshooting" type="number" min="0" max="600" inputmode="numeric"></label>
-        <label>Project <input id="ceh-fm-project" type="number" min="0" max="600" inputmode="numeric"></label>
-      </div>
-      <p id="ceh-fsum" class="ceh-tlabel"></p>
-      <label>Result (one line) <input id="ceh-fresult" maxlength="200"></label>
-      <div class="ceh-tbtns">
-        <button id="ceh-submit" class="md-button md-button--primary">Open GitHub form</button>
-        <button id="ceh-clear" class="md-button">Logged — clear timer</button>
-      </div>
+    <div class="ceh-clock">
+      <span class="ceh-live" aria-hidden="true"></span>
+      <span id="ceh-time" class="ceh-time">--:--</span>
+      <span id="ceh-date" class="ceh-date"></span>
     </div>
   </div>
 
-  <div id="ceh-now" class="ceh-now"></div>
+  <section class="ceh-panel ceh-route-panel" aria-label="Six-month route">
+    <div class="ceh-panel-head">
+      <h2>Route</h2>
+      <span id="ceh-pos" class="ceh-pos"></span>
+    </div>
+    <ol id="ceh-route" class="ceh-route"></ol>
+    <p id="ceh-next" class="ceh-next"></p>
+  </section>
 
-  <div class="ceh-cards">
-    <div class="ceh-card"><div class="ceh-num" id="ceh-total">–</div><div class="ceh-lbl">Total hours</div></div>
-    <div class="ceh-card"><div class="ceh-num" id="ceh-week">–</div><div class="ceh-lbl">This week</div></div>
-    <div class="ceh-card"><div class="ceh-num" id="ceh-sessions">–</div><div class="ceh-lbl">Sessions</div></div>
-    <div class="ceh-card"><div class="ceh-num" id="ceh-started">–</div><div class="ceh-lbl">Domains started</div></div>
+  <div id="ceh-kpis" class="ceh-kpis"></div>
+
+  <section class="ceh-panel ceh-watch" id="ceh-timer" aria-label="Session stopwatch">
+    <div class="ceh-watch-main">
+      <div>
+        <h2>Stopwatch</h2>
+        <p class="ceh-muted" id="ceh-tstate">Not running</p>
+      </div>
+      <div class="ceh-telapsed" id="ceh-telapsed">00:00:00</div>
+    </div>
+    <div class="ceh-btns">
+      <button id="ceh-start" class="ceh-btn ceh-btn-primary">Start</button>
+      <button id="ceh-pause" class="ceh-btn" hidden>Pause</button>
+      <button id="ceh-end" class="ceh-btn ceh-btn-primary" hidden>Finish</button>
+      <button id="ceh-reset" class="ceh-btn ceh-btn-quiet" hidden>Reset</button>
+    </div>
+    <p id="ceh-tell" class="ceh-tell" hidden></p>
+  </section>
+
+  <div class="ceh-two">
+    <section class="ceh-panel" aria-label="Time by activity">
+      <div class="ceh-panel-head"><h2>Time by activity</h2></div>
+      <div class="ceh-rings-wrap">
+        <svg id="ceh-rings" class="ceh-rings" viewBox="0 0 200 200" role="img" aria-label="Hours by activity"></svg>
+        <ul id="ceh-legend" class="ceh-legend"></ul>
+      </div>
+    </section>
+
+    <section class="ceh-panel" aria-label="Revision">
+      <div class="ceh-panel-head"><h2>Revision due</h2></div>
+      <div id="ceh-revise"></div>
+      <div class="ceh-panel-head ceh-mt"><h2>Weak areas</h2></div>
+      <div id="ceh-weak"></div>
+    </section>
   </div>
 
-  <h2>Weekly hours</h2>
-  <div id="ceh-weeks" class="ceh-weeks"></div>
+  <section class="ceh-panel" aria-label="Domain health">
+    <div class="ceh-panel-head">
+      <h2>Domain health</h2>
+      <div id="ceh-filters" class="ceh-chips" role="group" aria-label="Filter domains"></div>
+    </div>
+    <div id="ceh-domains" class="ceh-domains"></div>
+    <div class="ceh-key" id="ceh-key"></div>
+  </section>
 
-  <h2>Time by activity</h2>
-  <div id="ceh-cats" class="ceh-cats"></div>
-
-  <h2>Domains</h2>
-  <div class="ceh-scroll"><table id="ceh-domains" class="ceh-table"></table></div>
-
-  <h2>Recent sessions</h2>
-  <div id="ceh-recent"></div>
-
-  <h2>Weak areas</h2>
-  <div id="ceh-weak"></div>
+  <section class="ceh-panel" aria-label="Recent sessions">
+    <div class="ceh-panel-head"><h2>Recent sessions</h2><a class="ceh-link" href="../DAILY-LOG/">Daily log</a></div>
+    <ol id="ceh-feed" class="ceh-feed"></ol>
+  </section>
 
   <p id="ceh-foot" class="ceh-foot"></p>
 </div>

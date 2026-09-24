@@ -1,20 +1,46 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 # Cloud Engineer Handbook
 
-A living engineering handbook for a six-month **Senior Cloud Engineer** program.
-The goal is demonstrable engineering capability, not certificates.
+A working record of becoming a Senior Cloud Engineer: every concept learned, every command run, every break and fix,
+written up so it can be found again months later.
 
-**Method:** Learn → Execute → Break → Troubleshoot → Document → Project → Assess
+**Method:** learn, execute, break, troubleshoot, document, build, assess.
 
-## Start here
+<div class="grid cards" markdown>
 
-- [Roadmap](ROADMAP.md): the six-month plan (Month 1 is calibration)
-- [Dashboard](dashboard.md): live KSA clock, session timer, hours and status at a glance
-- [Progress](PROGRESS.md): evidence-based status per domain
-- [Daily Log](DAILY-LOG.md): every real study session
-- [Decisions](DECISIONS.md): what was decided and why
+-   :material-view-dashboard-outline:{ .lg } **[Dashboard](dashboard.md)**
+
+    ---
+
+    Hours, streak, route through the six months, and the health of every domain.
+
+-   :material-map-marker-path:{ .lg } **[Roadmap](ROADMAP.md)**
+
+    ---
+
+    The six-month plan. Month 1 calibrates the rest.
+
+-   :material-linux:{ .lg } **[Linux](01-Linux/README.md)**
+
+    ---
+
+    First topic. Session notes, real output, and break/fix write-ups land here.
+
+-   :material-scale-balance:{ .lg } **[Decisions](DECISIONS.md)**
+
+    ---
+
+    What was decided and why, so the reasoning survives.
+
+</div>
 
 !!! note "Public handbook"
-    Real-world incidents are used as training material with every client name, hostname,
-    domain, user ID, IP address and ticket number replaced by neutral placeholders.
+    Real incidents are used as training material, with every client name, hostname, domain, user ID,
+    IP address and ticket number replaced by neutral placeholders.
 
-Every page shows its **last updated** date and time (KSA, UTC+3), taken from its latest git commit.
+Every page shows when it was last updated (KSA, UTC+3), taken from its latest commit.

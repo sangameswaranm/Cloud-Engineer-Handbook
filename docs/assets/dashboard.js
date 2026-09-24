@@ -1,232 +1,206 @@
 (function () {
   "use strict";
-  const root = document.getElementById("ceh-dash");
-  if (!root) return;
+  if (!document.getElementById("ceh-dash")) return;
 
   const TZ = "Asia/Riyadh";
-  const REPO = "https://github.com/sangameswaranm/Cloud-Engineer-Handbook";
   const $ = (id) => document.getElementById(id);
-  const el = (tag, cls, text) => {
-    const e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text !== undefined) e.textContent = text;
-    return e;
-  };
-  const hrs = (min) => (Math.round((min / 60) * 10) / 10).toString();
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const svg = (tag, attrs) => { const e = document.createElementNS("http://www.w3.org/2000/svg", tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+  const hrs = (m) => { const h = m / 60; return h >= 10 ? Math.round(h).toString() : (Math.round(h * 10) / 10).toString(); };
+  const pad = (n) => String(n).padStart(2, "0");
   const slug = (s) => String(s).toLowerCase().replace(/[^a-z]+/g, "-");
 
-  // ---- live clock (IST) ----
-  const fTime = new Intl.DateTimeFormat("en-IN", { timeZone: TZ, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
-  const fDate = new Intl.DateTimeFormat("en-IN", { timeZone: TZ, weekday: "long", day: "numeric", month: "long", year: "numeric" });
-  function tick() {
-    const n = new Date();
-    $("ceh-time").textContent = fTime.format(n);
-    $("ceh-date").textContent = fDate.format(n) + " · KSA (UTC+3)";
-  }
-  tick();
-  setInterval(tick, 1000);
+  // Status scale (evidence ladder)
+  const LADDER = { "Not Started": 0, "In Progress": 30, "Needs Reinforcement": 45, "Lab Complete": 60, "Troubleshooting Complete": 75, "Project Complete": 90, "Assessed": 100 };
+  const CATS = [
+    { k: "theory", label: "Theory" }, { k: "lab", label: "Lab" },
+    { k: "troubleshooting", label: "Troubleshooting" }, { k: "project", label: "Project" },
+  ];
 
-  // ---- date helpers (dates stored as YYYY-MM-DD, IST calendar days) ----
-  const ymdKSA = (d) => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(d); // YYYY-MM-DD
-  const hmKSA = (d) => new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).format(d);
-  const todayIST = () => ymdKSA(new Date());
-  const toUTC = (ymd) => { const [y, m, d] = ymd.split("-").map(Number); return Date.UTC(y, m - 1, d); };
-  const mondayOf = (ymd) => { const t = toUTC(ymd); const dow = (new Date(t).getUTCDay() + 6) % 7; return t - dow * 86400000; };
-  const fmtShort = (t) => new Date(t).toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "UTC" });
+  // ---- clock (KSA) ----
+  const fTime = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+  const fDate = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, weekday: "short", day: "numeric", month: "short" });
+  const tick = () => { const n = new Date(); $("ceh-time").textContent = fTime.format(n); $("ceh-date").textContent = fDate.format(n) + " KSA"; };
+  tick(); setInterval(tick, 1000);
 
+  const ymd = (d) => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(d);
+  const hm = (d) => new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).format(d);
+  const today = () => ymd(new Date());
+  const toUTC = (s) => { const [y, m, d] = s.split("-").map(Number); return Date.UTC(y, m - 1, d); };
+  const DAY = 86400000;
+  const mondayOf = (s) => { const t = toUTC(s); return t - ((new Date(t).getUTCDay() + 6) % 7) * DAY; };
+  const daysSince = (s) => Math.round((toUTC(today()) - toUTC(s)) / DAY);
+  const niceDate = (s) => new Date(toUTC(s)).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 
-  // ---- session timer (state kept in this browser; nothing is saved to GitHub until you submit the form) ----
-  const KEY = "ceh-timer-v1";
-  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } };
-  const save = (st) => { try { st ? localStorage.setItem(KEY, JSON.stringify(st)) : localStorage.removeItem(KEY); } catch (e) {} };
-  let st = load(); // {startedAt, accMs, runSince, endedAt}
-  const elapsedMs = () => !st ? 0 : st.accMs + (st.runSince ? Date.now() - st.runSince : 0);
-  const pad = (n) => String(n).padStart(2, "0");
-  const fmtDur = (ms) => { const s = Math.floor(ms / 1000); return pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(s % 60); };
+  // ---- stopwatch (kept in this browser only) ----
+  const KEY = "ceh-watch-v2";
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } };
+  const save = (v) => { try { v ? localStorage.setItem(KEY, JSON.stringify(v)) : localStorage.removeItem(KEY); } catch (e) {} };
+  let st = load();
+  const ms = () => (!st ? 0 : st.acc + (st.run ? Date.now() - st.run : 0));
+  const dur = (x) => { const s = Math.floor(x / 1000); return pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(s % 60); };
   const baseTitle = document.title;
-
-  function paintTimer() {
-    const ms = elapsedMs();
-    $("ceh-telapsed").textContent = fmtDur(ms);
-    const running = st && st.runSince && !st.endedAt, paused = st && !st.runSince && !st.endedAt, ended = st && st.endedAt;
-    $("ceh-tstate").textContent = !st ? "No session running" : ended ? "Session ended — log it below"
-      : (running ? "Running since " : "Paused · started ") + hmKSA(new Date(st.startedAt)) + " KSA";
+  function paint() {
+    const running = st && st.run && !st.done, paused = st && !st.run && !st.done, done = st && st.done;
+    $("ceh-telapsed").textContent = dur(ms());
+    $("ceh-tstate").textContent = !st ? "Not running" : done ? "Finished at " + hm(new Date(st.done)) + " KSA"
+      : (running ? "Running since " : "Paused, started ") + hm(new Date(st.start)) + " KSA";
     $("ceh-start").hidden = !!st;
-    $("ceh-pause").hidden = !st || !!ended;
+    $("ceh-pause").hidden = !st || !!done;
     $("ceh-pause").textContent = paused ? "Resume" : "Pause";
-    $("ceh-end").hidden = !st || !!ended;
-    $("ceh-discard").hidden = !st;
-    $("ceh-logform").hidden = !ended;
-    $("ceh-timer").classList.toggle("ceh-running", !!running);
-    document.title = running ? "⏱ " + fmtDur(ms) + " · " + baseTitle : baseTitle;
+    $("ceh-end").hidden = !st || !!done;
+    $("ceh-reset").hidden = !st;
+    $("ceh-timer").classList.toggle("is-running", !!running);
+    const tell = $("ceh-tell");
+    tell.hidden = !done;
+    if (done) { const m = Math.max(1, Math.round(ms() / 60000)); tell.textContent = "Session time: " + (m >= 60 ? Math.floor(m / 60) + " h " : "") + (m % 60) + " min. Tell Claude in chat and it gets logged."; }
+    document.title = running ? dur(ms()) + " | " + baseTitle : baseTitle;
   }
-  $("ceh-start").onclick = () => { const n = Date.now(); st = { startedAt: n, accMs: 0, runSince: n, endedAt: null }; save(st); paintTimer(); };
-  $("ceh-pause").onclick = () => {
-    if (st.runSince) { st.accMs += Date.now() - st.runSince; st.runSince = null; } else { st.runSince = Date.now(); }
-    save(st); paintTimer();
-  };
-  $("ceh-end").onclick = () => {
-    if (st.runSince) { st.accMs += Date.now() - st.runSince; st.runSince = null; }
-    st.endedAt = Date.now(); save(st); fillForm(); paintTimer();
-  };
-  $("ceh-discard").onclick = () => { if (confirm("Discard this session? Its time will not be logged.")) { st = null; save(st); paintTimer(); } };
-  $("ceh-clear").onclick = () => { if (confirm("Clear the timer? Only do this after the GitHub form was submitted.")) { st = null; save(st); paintTimer(); } };
-  setInterval(paintTimer, 1000);
-  paintTimer();
+  $("ceh-start").onclick = () => { const n = Date.now(); st = { start: n, acc: 0, run: n, done: null }; save(st); paint(); };
+  $("ceh-pause").onclick = () => { if (st.run) { st.acc += Date.now() - st.run; st.run = null; } else st.run = Date.now(); save(st); paint(); };
+  $("ceh-end").onclick = () => { if (st.run) { st.acc += Date.now() - st.run; st.run = null; } st.done = Date.now(); save(st); paint(); };
+  $("ceh-reset").onclick = () => { if (confirm("Reset the stopwatch?")) { st = null; save(st); paint(); } };
+  paint(); setInterval(paint, 1000);
 
-  let formCtx = null;
-  const CATS = ["theory", "lab", "troubleshooting", "project"];
-  function totalMin() { return st ? Math.max(1, Math.round(elapsedMs() / 60000)) : 0; }
-  function updSum() {
-    const sum = CATS.reduce((a, c) => a + (Number($("ceh-fm-" + c).value) || 0), 0);
-    $("ceh-fsum").textContent = "Split total: " + sum + " of " + totalMin() + " min" + (sum !== totalMin() ? " — check the split" : " ✓");
-  }
-  function fillForm() {
-    if (!formCtx || !st || !st.endedAt) return;
-    const { p, sessions } = formCtx;
-    $("ceh-ftotal").textContent = totalMin();
-    const saved = st.form || {};
-    const n = new Set(sessions.map((x) => x.issue || (x.session + "|" + x.date))).size + 1;
-    $("ceh-fsession").value = saved.session || "S" + pad(n);
-    const sel = $("ceh-fdomain"); sel.innerHTML = "";
-    (p.domains || []).forEach((d) => { const o = el("option", null, d.name); o.value = d.name; sel.appendChild(o); });
-    const next = (p.current && p.current.next_session) || "";
-    sel.value = saved.domain || ((p.domains || []).find((d) => next.toLowerCase().includes(d.name.toLowerCase())) || (p.domains || [])[0] || {}).name || "";
-    $("ceh-ftopic").value = saved.topic || next.replace(/^Session\s*\d+\s*[—-]\s*/i, "");
-    CATS.forEach((c) => { $("ceh-fm-" + c).value = saved[c] != null ? saved[c] : (c === "lab" ? totalMin() : 0); });
-    $("ceh-fresult").value = saved.result || "";
-    updSum();
-  }
-  function setupLogForm(p, sessions) {
-    formCtx = { p, sessions };
-    CATS.forEach((c) => $("ceh-fm-" + c).addEventListener("input", updSum));
-    fillForm();
-  }
-  $("ceh-submit").onclick = () => {
-    const f = { session: $("ceh-fsession").value.trim(), domain: $("ceh-fdomain").value, topic: $("ceh-ftopic").value.trim(), result: $("ceh-fresult").value.trim() };
-    CATS.forEach((c) => { f[c] = Number($("ceh-fm-" + c).value) || 0; });
-    if (!f.topic) { alert("Add a topic first."); return; }
-    if (!CATS.some((c) => f[c] > 0)) { alert("Put the minutes into at least one category."); return; }
-    st.form = f; save(st);
-    const start = new Date(st.startedAt), end = new Date(st.endedAt);
-    const lines = [
-      ["Date", ymdKSA(start)], ["Start", hmKSA(start)], ["End", hmKSA(end)], ["Session", f.session], ["Domain", f.domain],
-      ["Topic", f.topic], ["Theory minutes", f.theory], ["Lab minutes", f.lab], ["Troubleshooting minutes", f.troubleshooting],
-      ["Project minutes", f.project], ["Result", f.result || "_No response_"],
-    ];
-    const body = lines.map(([k, v]) => "### " + k + "\n\n" + v).join("\n\n") +
-      "\n\n<!-- Sent by the dashboard timer. Press Submit; the logger reads the fields above. Keep it sanitized: public repo. -->";
-    const total = CATS.reduce((a, c) => a + f[c], 0);
-    const q = new URLSearchParams({ title: "Session log: " + f.session + " · " + f.domain + " · " + ymdKSA(start) + " · " + total + " min", body });
-    location.href = REPO + "/issues/new?" + q.toString(); // same tab: less likely to be hijacked by the GitHub app
-  };
-
-  // ---- load data ----
+  // ---- data ----
   const base = new URL("../data/", location.href);
-  const get = (f) => fetch(new URL(f + "?t=" + Date.now(), base)).then((r) => { if (!r.ok) throw new Error(f + " HTTP " + r.status); return r.json(); });
-
+  const get = (f) => fetch(new URL(f + "?t=" + Date.now(), base)).then((r) => { if (!r.ok) throw new Error(f + " returned " + r.status); return r.json(); });
   Promise.all([get("progress.json"), get("sessions.json")])
     .then(([p, s]) => render(p, Array.isArray(s) ? s : []))
-    .catch((e) => { $("ceh-foot").textContent = "Could not load dashboard data: " + e.message; });
+    .catch((e) => { $("ceh-foot").textContent = "Dashboard data did not load (" + e.message + "). Refresh the page to retry."; });
 
-  function render(p, sessions) {
-    // current position
-    const now = $("ceh-now");
-    const c = p.current || {};
-    now.appendChild(el("span", "ceh-pill", "Month " + (c.month ?? "–") + " · Week " + (c.week ?? "–")));
-    now.appendChild(el("span", "ceh-next", "Next: " + (c.next_session || "—")));
-    if (p.program_start) {
-      const day = Math.floor((toUTC(todayIST()) - toUTC(p.program_start)) / 86400000) + 1;
-      now.appendChild(el("span", "ceh-pill", "Day " + day));
-    } else {
-      now.appendChild(el("span", "ceh-pill ceh-muted", "Program not started"));
-    }
+  function render(p, S) {
+    const domains = p.domains || [];
+    const cur = p.current || {};
+    const sum = (arr) => arr.reduce((a, x) => a + (Number(x.minutes) || 0), 0);
+    const key = (x) => x.issue || x.session + "|" + x.date;
 
-    // cards
-    const total = sessions.reduce((a, x) => a + (Number(x.minutes) || 0), 0);
-    const thisMon = mondayOf(todayIST());
-    const weekMin = sessions.filter((x) => x.date && mondayOf(x.date) === thisMon).reduce((a, x) => a + (Number(x.minutes) || 0), 0);
-    const sKey = (x) => x.issue || (x.session + "|" + x.date);
-    const sessionIds = new Set(sessions.map(sKey));
-    const started = (p.domains || []).filter((d) => d.status && d.status !== "Not Started").length;
-    $("ceh-total").textContent = hrs(total);
-    $("ceh-week").textContent = hrs(weekMin);
-    $("ceh-sessions").textContent = sessionIds.size;
-    $("ceh-started").textContent = started + " / " + (p.domains || []).length;
-
-    // weekly bars: last 8 weeks
-    const weeks = $("ceh-weeks");
-    const buckets = [];
-    for (let i = 7; i >= 0; i--) buckets.push({ start: thisMon - i * 7 * 86400000, min: 0 });
-    sessions.forEach((x) => { if (!x.date) return; const b = buckets.find((k) => k.start === mondayOf(x.date)); if (b) b.min += Number(x.minutes) || 0; });
-    const max = Math.max(60, ...buckets.map((b) => b.min));
-    buckets.forEach((b) => {
-      const col = el("div", "ceh-wcol");
-      const bar = el("div", "ceh-wbar");
-      bar.style.height = Math.round((b.min / max) * 100) + "%";
-      bar.title = hrs(b.min) + " h";
-      const barWrap = el("div", "ceh-wbarwrap");
-      barWrap.appendChild(bar);
-      col.appendChild(el("div", "ceh-wval", b.min ? hrs(b.min) : ""));
-      col.appendChild(barWrap);
-      col.appendChild(el("div", "ceh-wlbl", fmtShort(b.start)));
-      weeks.appendChild(col);
+    // Route
+    $("ceh-pos").textContent = "Month " + (cur.month || 1) + ", week " + (cur.week || 1) + (p.program_start ? ", day " + (daysSince(p.program_start) + 1) : "");
+    const route = $("ceh-route");
+    (p.months || []).forEach((m) => {
+      const inMonth = domains.filter((d) => d.month === m.n);
+      const pct = inMonth.length ? Math.round(inMonth.reduce((a, d) => a + (LADDER[d.status] || 0), 0) / inMonth.length) : 0;
+      const li = el("li", "ceh-hop" + (m.n < cur.month ? " is-done" : m.n === cur.month ? " is-now" : ""));
+      const dot = el("span", "ceh-hop-dot", String(m.n));
+      const txt = el("div", "ceh-hop-txt");
+      txt.appendChild(el("strong", null, m.title));
+      txt.appendChild(el("span", null, m.focus));
+      const bar = el("span", "ceh-hop-bar"); const fill = el("i"); fill.style.width = pct + "%"; bar.appendChild(fill);
+      txt.appendChild(bar);
+      li.appendChild(dot); li.appendChild(txt);
+      route.appendChild(li);
     });
-    if (!total) weeks.appendChild(el("p", "ceh-empty", "No sessions logged yet."));
+    $("ceh-next").textContent = "Up next: " + (cur.next_session || "not set");
 
-    // categories
-    const cats = ["theory", "lab", "troubleshooting", "project"];
-    const catBox = $("ceh-cats");
-    cats.forEach((k) => {
-      const m = sessions.filter((x) => x.category === k).reduce((a, x) => a + (Number(x.minutes) || 0), 0);
-      const row = el("div", "ceh-crow");
-      row.appendChild(el("span", "ceh-cname", k[0].toUpperCase() + k.slice(1)));
-      const track = el("div", "ceh-ctrack");
-      const fill = el("div", "ceh-cfill ceh-c-" + k);
-      fill.style.width = (total ? (m / total) * 100 : 0) + "%";
-      track.appendChild(fill);
-      row.appendChild(track);
-      row.appendChild(el("span", "ceh-cval", hrs(m) + " h"));
-      catBox.appendChild(row);
+    // KPIs
+    const total = sum(S);
+    const thisMon = mondayOf(today());
+    const wk = (off) => sum(S.filter((x) => x.date && mondayOf(x.date) === thisMon - off * 7 * DAY));
+    const thisW = wk(0), lastW = wk(1);
+    const days = [...new Set(S.map((x) => x.date))].sort().reverse();
+    let streak = 0;
+    if (days.length && daysSince(days[0]) <= 1) { streak = 1; for (let i = 1; i < days.length; i++) { if (toUTC(days[i - 1]) - toUTC(days[i]) === DAY) streak++; else break; } }
+    const started = domains.filter((d) => d.status !== "Not Started").length;
+    const weeks = []; for (let i = 7; i >= 0; i--) weeks.push(wk(i));
+    const kpis = [
+      { label: "Hours logged", value: hrs(total), sub: new Set(S.map(key)).size + " sessions", spark: weeks },
+      { label: "This week", value: hrs(thisW) + " h", sub: lastW || thisW ? (thisW >= lastW ? "Up " : "Down ") + hrs(Math.abs(thisW - lastW)) + " h on last week" : "No sessions yet", trend: thisW - lastW },
+      { label: "Streak", value: streak + (streak === 1 ? " day" : " days"), sub: days.length ? "Last session " + niceDate(days[0]) : "Starts with Session 1" },
+      { label: "Domains started", value: started + "/" + domains.length, sub: domains.filter((d) => (LADDER[d.status] || 0) >= 90).length + " at project level or above" },
+    ];
+    const box = $("ceh-kpis");
+    kpis.forEach((k) => {
+      const c = el("div", "ceh-kpi");
+      c.appendChild(el("span", "ceh-kpi-label", k.label));
+      c.appendChild(el("span", "ceh-kpi-value", k.value));
+      const sub = el("span", "ceh-kpi-sub" + (k.trend > 0 ? " is-up" : k.trend < 0 ? " is-down" : ""), k.sub);
+      c.appendChild(sub);
+      if (k.spark) {
+        const mx = Math.max(60, ...k.spark), sp = svg("svg", { viewBox: "0 0 80 24", class: "ceh-spark", "aria-hidden": "true" });
+        k.spark.forEach((v, i) => { const h = Math.max(1.5, (v / mx) * 22); sp.appendChild(svg("rect", { x: i * 10 + 1, y: 24 - h, width: 7, height: h, rx: 1.5, class: i === 7 ? "now" : "" })); });
+        c.appendChild(sp);
+      }
+      box.appendChild(c);
     });
 
-    // domain table
-    const t = $("ceh-domains");
-    const head = t.createTHead().insertRow();
-    ["Domain", "Theory", "Labs", "Troubleshooting", "Project", "Status"].forEach((h) => head.appendChild(el("th", null, h)));
-    const body = t.createTBody();
-    (p.domains || []).forEach((d) => {
-      const r = body.insertRow();
-      r.appendChild(el("td", "ceh-dname", d.name));
-      ["theory", "labs", "troubleshooting", "project", "status"].forEach((k) => {
-        const td = el("td");
-        td.appendChild(el("span", "ceh-chip ceh-s-" + slug(d[k] || "Not Started"), d[k] || "Not Started"));
-        r.appendChild(td);
+    // Rings
+    const rings = $("ceh-rings"), legend = $("ceh-legend");
+    const cMins = CATS.map((c) => sum(S.filter((x) => x.category === c.k)));
+    const cmax = Math.max(1, ...cMins);
+    CATS.forEach((c, i) => {
+      const r = 84 - i * 16, len = 2 * Math.PI * r, frac = total ? cMins[i] / cmax : 0;
+      rings.appendChild(svg("circle", { cx: 100, cy: 100, r, class: "ceh-ring-track" }));
+      if (frac > 0) rings.appendChild(svg("circle", { cx: 100, cy: 100, r, class: "ceh-ring ceh-c-" + c.k, "stroke-dasharray": (len * 0.75 * frac) + " " + len, transform: "rotate(-90 100 100)" }));
+      const li = el("li"); li.appendChild(el("i", "ceh-c-" + c.k)); li.appendChild(el("span", null, c.label)); li.appendChild(el("b", null, hrs(cMins[i]) + " h")); legend.appendChild(li);
+    });
+    const t1 = svg("text", { x: 100, y: 104, class: "ceh-ring-num" }); t1.textContent = hrs(total);
+    const t2 = svg("text", { x: 100, y: 122, class: "ceh-ring-lbl" }); t2.textContent = "hours";
+    rings.appendChild(t1); rings.appendChild(t2);
+
+    // Revision due: studied domains not touched for 7+ days
+    const last = {};
+    S.forEach((x) => { if (x.domain && x.date && (!last[x.domain] || x.date > last[x.domain])) last[x.domain] = x.date; });
+    const due = Object.entries(last).map(([d, dt]) => ({ d, n: daysSince(dt) })).filter((x) => x.n >= 7).sort((a, b) => b.n - a.n);
+    const rv = $("ceh-revise");
+    if (!due.length) rv.appendChild(el("p", "ceh-empty", Object.keys(last).length ? "Everything studied in the last 7 days. Nothing to revise yet." : "Topics you studied 7 or more days ago will show here, so they get revised before they fade."));
+    else { const ul = el("ul", "ceh-list"); due.forEach((x) => { const li = el("li"); li.appendChild(el("span", null, x.d)); li.appendChild(el("b", "ceh-warn", x.n + " days ago")); ul.appendChild(li); }); rv.appendChild(ul); }
+    const wa = p.weak_areas || [], wb = $("ceh-weak");
+    if (!wa.length) wb.appendChild(el("p", "ceh-empty", "None recorded. They are added from real lab and assessment results."));
+    else { const ul = el("ul", "ceh-list"); wa.forEach((w) => ul.appendChild(el("li", null, typeof w === "string" ? w : w.area + (w.note ? ": " + w.note : "")))); wb.appendChild(ul); }
+
+    // Domain health with filters
+    const filters = [
+      { id: "now", label: "This month", f: (d) => d.month === (cur.month || 1) || d.status !== "Not Started" },
+      { id: "started", label: "Started", f: (d) => d.status !== "Not Started" },
+      { id: "all", label: "All 18", f: () => true },
+    ];
+    const fbox = $("ceh-filters"), grid = $("ceh-domains");
+    let active = "now";
+    const draw = () => {
+      grid.innerHTML = "";
+      const list = domains.filter(filters.find((f) => f.id === active).f);
+      if (!list.length) grid.appendChild(el("p", "ceh-empty", "No domain has started yet. Session 1 starts Linux."));
+      list.forEach((d) => {
+        const c = el("article", "ceh-dom");
+        const h = el("div", "ceh-dom-head");
+        h.appendChild(el("h3", null, d.name));
+        h.appendChild(el("span", "ceh-status ceh-s-" + slug(d.status), d.status));
+        c.appendChild(h);
+        c.appendChild(el("span", "ceh-dom-month", "Month " + d.month + (last[d.name] ? ", last studied " + niceDate(last[d.name]) : "")));
+        [["Theory", d.theory], ["Labs", d.labs], ["Troubleshooting", d.troubleshooting], ["Project", d.project]].forEach(([lbl, v]) => {
+          const row = el("div", "ceh-meter");
+          row.appendChild(el("span", null, lbl));
+          const tr = el("span", "ceh-meter-track"); const fi = el("i", "ceh-s-" + slug(v)); fi.style.width = (LADDER[v] || 0) + "%"; tr.appendChild(fi);
+          row.appendChild(tr); row.title = lbl + ": " + v;
+          c.appendChild(row);
+        });
+        grid.appendChild(c);
       });
-    });
+      [...fbox.children].forEach((b) => b.setAttribute("aria-pressed", b.dataset.id === active));
+    };
+    filters.forEach((f) => { const b = el("button", "ceh-chip", f.label); b.dataset.id = f.id; b.onclick = () => { active = f.id; draw(); }; fbox.appendChild(b); });
+    draw();
+    const keyBox = $("ceh-key");
+    Object.keys(LADDER).forEach((s) => { const k = el("span"); k.appendChild(el("i", "ceh-s-" + slug(s))); k.appendChild(document.createTextNode(s)); keyBox.appendChild(k); });
 
-    // recent sessions (entries grouped per logged session)
-    const rec = $("ceh-recent");
+    // Feed
     const groups = new Map();
-    sessions.forEach((x) => { const k = sKey(x); if (!groups.has(k)) groups.set(k, { ...x, parts: [] }); groups.get(k).parts.push(x); });
-    const recent = [...groups.values()].sort((a, b) => (String(b.date) + (b.start || "")).localeCompare(String(a.date) + (a.start || ""))).slice(0, 5);
-    if (!recent.length) rec.appendChild(el("p", "ceh-empty", "No sessions logged yet."));
+    S.forEach((x) => { const k = key(x); if (!groups.has(k)) groups.set(k, { ...x, parts: [] }); groups.get(k).parts.push(x); });
+    const feed = $("ceh-feed");
+    const recent = [...groups.values()].sort((a, b) => (b.date + (b.start || "")).localeCompare(a.date + (a.start || ""))).slice(0, 6);
+    if (!recent.length) feed.appendChild(el("li", "ceh-empty", "No sessions yet. The first one appears here after Session 1."));
     recent.forEach((g) => {
-      const tot = g.parts.reduce((a, x) => a + (Number(x.minutes) || 0), 0);
-      const it = el("div", "ceh-sess");
-      it.appendChild(el("div", "ceh-sess-top", [g.date, g.start && g.end ? g.start + "–" + g.end : "", g.session, g.domain].filter(Boolean).join(" · ")));
-      it.appendChild(el("div", "ceh-sess-topic", (g.topic || "") + " — " + hrs(tot) + " h"));
-      it.appendChild(el("div", "ceh-sess-res", g.parts.map((x) => x.category + " " + x.minutes + "m").join(" · ") + (g.result ? " — " + g.result : "")));
-      rec.appendChild(it);
+      const li = el("li", "ceh-feed-item");
+      const head = el("div", "ceh-feed-head");
+      head.appendChild(el("strong", null, (g.session ? g.session + ": " : "") + (g.topic || g.domain)));
+      head.appendChild(el("span", "ceh-muted", niceDate(g.date)));
+      li.appendChild(head);
+      li.appendChild(el("div", "ceh-feed-meta", g.domain + ", " + hrs(sum(g.parts)) + " h (" + g.parts.map((x) => x.category + " " + x.minutes + " min").join(", ") + ")"));
+      if (g.result) li.appendChild(el("div", "ceh-feed-res", g.result));
+      feed.appendChild(li);
     });
 
-    // weak areas
-    const weak = $("ceh-weak");
-    const wa = p.weak_areas || [];
-    if (!wa.length) weak.appendChild(el("p", "ceh-empty", "None recorded yet — added only from real lab and assessment results."));
-    else { const ul = el("ul"); wa.forEach((w) => ul.appendChild(el("li", null, typeof w === "string" ? w : w.area + (w.note ? " — " + w.note : "")))); weak.appendChild(ul); }
-
-    setupLogForm(p, sessions);
-    $("ceh-foot").textContent = "Data last updated: " + (p.updated || "unknown") + " · Statuses change only with evidence.";
+    $("ceh-foot").textContent = "Data updated " + (p.updated || "unknown") + ". Hours come from logged sessions; statuses change only with evidence.";
   }
 })();

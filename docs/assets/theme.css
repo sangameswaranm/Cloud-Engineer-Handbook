@@ -1,0 +1,23 @@
+/* Site-wide look: deep teal-ink header, IBM Plex, calm surfaces */
+:root, [data-md-color-scheme="default"] {
+  --md-primary-fg-color: #12303a;
+  --md-primary-fg-color--light: #1c4452;
+  --md-primary-fg-color--dark: #0b2029;
+  --md-accent-fg-color: #0b7a75;
+  --md-typeset-a-color: #0b6f6a;
+  --ceh-surface: #ffffff; --ceh-page: #f3f5f7; --ceh-line: #e1e6eb;
+  --ceh-ink: #14212b; --ceh-muted: #5f6b76; --ceh-accent: #0b7a75; --ceh-accent-soft: #e0f2f0;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0f2229;
+  --md-accent-fg-color: #3cc6be;
+  --md-typeset-a-color: #5fd3cb;
+  --md-default-bg-color: #0f161d;
+  --ceh-surface: #17212a; --ceh-page: #0f161d; --ceh-line: #26333f;
+  --ceh-ink: #e7edf2; --ceh-muted: #93a1ad; --ceh-accent: #3cc6be; --ceh-accent-soft: #123a3a;
+}
+.md-typeset h1 { font-weight: 600; letter-spacing: -0.01em; color: var(--ceh-ink); }
+.md-typeset h2 { font-weight: 600; }
+.md-typeset table:not([class]) { font-size: .72rem; border-radius: 8px; }
+.md-typeset .grid.cards > ul > li { border-radius: 10px; border-color: var(--ceh-line); }
+.md-typeset .grid.cards > ul > li:hover { border-color: var(--ceh-accent); box-shadow: none; }
