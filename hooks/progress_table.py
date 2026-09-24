@@ -25,3 +25,13 @@ def on_page_markdown(markdown, page, config, files):
     return (markdown.replace("<!--DOMAINS-->", "\n".join(rows))
                     .replace("<!--HOURS-->", "\n".join(hours))
                     .replace("<!--WEAK-->", weak))
+
+
+def on_config(config):
+    """Cache-busting: add a build version to the dashboard files, so phones never
+    combine a new page with an old cached script (GitHub Pages caches ~10 min)."""
+    import time
+    v = os.environ.get("GITHUB_SHA", str(int(time.time())))[:10]
+    config["extra_javascript"] = [f"{x}?v={v}" if "dashboard" in str(x) else x for x in config["extra_javascript"]]
+    config["extra_css"] = [f"{x}?v={v}" if "dashboard" in x else x for x in config["extra_css"]]
+    return config
