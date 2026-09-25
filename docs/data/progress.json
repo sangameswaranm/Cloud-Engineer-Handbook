@@ -1,19 +1,19 @@
 {
-  "updated": "2026-09-24",
-  "program_start": null,
+  "updated": "2026-09-25",
+  "program_start": "2026-09-25",
   "current": {
     "month": 1,
     "week": 1,
-    "next_session": "Session 1 — Linux Fundamentals"
+    "next_session": "Session 2 — Linux Topic 3: Filesystem"
   },
   "domains": [
     {
       "name": "Linux",
-      "theory": "Not Started",
-      "labs": "Not Started",
-      "troubleshooting": "Not Started",
+      "theory": "In Progress",
+      "labs": "In Progress",
+      "troubleshooting": "In Progress",
       "project": "Not Started",
-      "status": "Not Started",
+      "status": "In Progress",
       "month": 1
     },
     {
@@ -170,7 +170,10 @@
       "month": 6
     }
   ],
-  "weak_areas": [],
+  "weak_areas": [
+    "Typing accuracy: use Tab completion (several typos caused 'command not found')",
+    "Reading before/after evidence in incidents (read Incident 2B in reverse at first)"
+  ],
   "months": [
     {
       "n": 1,

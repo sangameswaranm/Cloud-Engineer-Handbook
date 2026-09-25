@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "id": "INC-001",
+    "date": "2026-09-25",
+    "module": "Linux",
+    "topic": "Introduction",
+    "type": "live",
+    "symptom": "Vendor installer says 'Unsupported OS' on a RHEL 9 compatible server",
+    "root_cause": "Installer checks ID=\"rhel\" in /etc/os-release; server has ID=\"ol\" (compatibility is in ID_LIKE / PLATFORM_ID)",
+    "fix": "Confirm vendor support for the distribution and use their supported installer or override. Never edit /etc/os-release.",
+    "page": "01-Linux/session-01-intro-architecture.md"
+  },
+  {
+    "id": "INC-002",
+    "date": "2026-09-25",
+    "module": "Linux",
+    "topic": "Architecture",
+    "type": "live",
+    "symptom": "\"cat is broken\": Permission denied on /etc/shadow",
+    "root_cause": "The kernel refuses access based on the file's permissions; cat only reports the answer",
+    "fix": "Nothing to fix in cat. Proof: cat /etc/hostname works, cat /etc/shadow is denied (same program, different file).",
+    "page": "01-Linux/session-01-intro-architecture.md"
+  },
+  {
+    "id": "INC-003",
+    "date": "2026-09-25",
+    "module": "Linux",
+    "topic": "Architecture (boot)",
+    "type": "tabletop",
+    "symptom": "Vendor agent stopped working after patching and reboot",
+    "root_cause": "Patching changed GRUB's default kernel from 6.12 (UEK) to 5.14 (RHCK); agent depends on the kernel it was installed on",
+    "fix": "grubby --set-default /boot/vmlinuz-<wanted kernel>, reboot, verify uname -r. Prevention: check grubby --default-kernel before rebooting.",
+    "page": "01-Linux/session-01-intro-architecture.md"
+  },
+  {
+    "id": "INC-004",
+    "date": "2026-09-25",
+    "module": "Linux",
+    "topic": "Architecture (/proc)",
+    "type": "tabletop",
+    "symptom": "Developer plans 96 workers because cpuinfo says '96-Core Processor'",
+    "root_cause": "The 96 cores belong to the physical host; the VM has 4 vCPUs (4 model name lines)",
+    "fix": "Size workers to the VM's vCPUs; 96 CPU-heavy workers on 4 vCPUs queue and make the server extremely slow.",
+    "page": "01-Linux/session-01-intro-architecture.md"
+  }
+]

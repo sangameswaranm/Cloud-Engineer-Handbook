@@ -16,3 +16,10 @@ Every topic in every module is taught with this lesson format. Agreed on 2026-09
 12. **Documentation.** Real commands, outputs, incident, root cause, fix and proof, written to the topic page; coverage table and dashboard updated only from real work.
 
 Diagrams are used wherever they make the mechanism clearer.
+
+## Rules added from Session 01
+
+- **Only taught commands** in tests and incidents. A new command is explained (anatomy, each part) before it is used.
+- **Small steps.** One small idea, one small lab, then check understanding. Deep tools (like `strace`) wait for their topic.
+- **Label every incident:** 🧪 SCENARIO (pretend, real server not affected) or 🔧 LIVE LAB (real change, with the undo).
+- **A topic is complete only when the learner says it is clear**, not just when the lab ran.

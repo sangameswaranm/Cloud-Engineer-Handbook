@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "date": "2026-09-25",
+    "session": "S01",
+    "domain": "Linux",
+    "topic": "Introduction & Architecture",
+    "category": "theory",
+    "minutes": 35,
+    "result": "Topics 1-2 assessed: pass",
+    "notes": "Stopwatch total 1:29:05. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-25",
+    "session": "S01",
+    "domain": "Linux",
+    "topic": "Introduction & Architecture",
+    "category": "lab",
+    "minutes": 39,
+    "result": "Topics 1-2 assessed: pass",
+    "notes": "Stopwatch total 1:29:05. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-25",
+    "session": "S01",
+    "domain": "Linux",
+    "topic": "Introduction & Architecture",
+    "category": "troubleshooting",
+    "minutes": 15,
+    "result": "Topics 1-2 assessed: pass",
+    "notes": "Stopwatch total 1:29:05. Category split estimated from session content."
+  }
+]

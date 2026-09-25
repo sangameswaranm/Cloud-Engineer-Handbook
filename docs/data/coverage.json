@@ -21,25 +21,25 @@
     "n": 1,
     "topic": "Introduction",
     "level": "F",
-    "theory": "in-progress",
-    "basic": "not-started",
+    "theory": "done",
+    "basic": "done",
     "intermediate": "not-started",
     "advanced": "not-started",
-    "troubleshooting": "not-started",
+    "troubleshooting": "done",
     "project": "not-started",
-    "assessment": "not-started"
+    "assessment": "done"
    },
    {
     "n": 2,
     "topic": "Linux Architecture",
     "level": "F",
-    "theory": "not-started",
-    "basic": "not-started",
+    "theory": "done",
+    "basic": "done",
     "intermediate": "not-started",
     "advanced": "not-started",
-    "troubleshooting": "not-started",
+    "troubleshooting": "done",
     "project": "not-started",
-    "assessment": "not-started"
+    "assessment": "done"
    },
    {
     "n": 3,

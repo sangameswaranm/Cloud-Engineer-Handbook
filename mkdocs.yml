@@ -78,7 +78,9 @@ nav:
       - Lab Environment: LAB-ENVIRONMENT.md
       - Cost Control: COST-CONTROL.md
   - Topics:
-      - Linux: 01-Linux/README.md
+      - Linux:
+          - Overview: 01-Linux/README.md
+          - Session 01 Intro & Architecture: 01-Linux/session-01-intro-architecture.md
       - Networking: 02-Networking/README.md
       - Bash: 03-Bash/README.md
       - Python: 04-Python/README.md
