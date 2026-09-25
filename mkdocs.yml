@@ -68,6 +68,7 @@ nav:
   - Dashboard: dashboard.md
   - Program:
       - Roadmap: ROADMAP.md
+      - Knowledge + Task Map: KNOWLEDGE-MAP.md
       - Progress: PROGRESS.md
       - Daily Log: DAILY-LOG.md
       - Decisions: DECISIONS.md
