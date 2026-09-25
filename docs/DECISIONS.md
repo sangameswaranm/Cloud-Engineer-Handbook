@@ -11,3 +11,4 @@
 | D-07 | 2026-09-24 | Handbook lives in a public GitHub repo, published with GitHub Pages | Portfolio evidence + live dashboard |
 | D-08 | 2026-09-24 | All real-world details are sanitized before commit | Public repo; protect client data |
 | D-09 | 2026-09-25 | Linux is taught distro-neutral, with commands for every major family | Skills must work on any Linux flavour, not one VM |
+| D-10 | 2026-09-25 | Lesson format locked (see Teaching Method) and full knowledge + task map adopted | One consistent, deep format for every topic |
