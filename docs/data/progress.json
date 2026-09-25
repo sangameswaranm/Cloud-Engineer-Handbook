@@ -4,7 +4,7 @@
   "current": {
     "month": 1,
     "week": 1,
-    "next_session": "Session 2 — Linux Topic 3: Filesystem"
+    "next_session": "Session 3 — Topic 2 intermediate (health snapshot), then Topics 2–3 advanced, then Topic 4"
   },
   "domains": [
     {
@@ -172,7 +172,9 @@
   ],
   "weak_areas": [
     "Typing accuracy: use Tab completion (several typos caused 'command not found')",
-    "Reading before/after evidence in incidents (read Incident 2B in reverse at first)"
+    "Reading before/after evidence in incidents (read Incident 2B in reverse at first)",
+    "Finishing answers: convert raw values into the unit a person needs (kB → GB)",
+    "Absolute paths must start with / (wrote opt/app/backups)"
   ],
   "months": [
     {

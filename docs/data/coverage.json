@@ -45,13 +45,13 @@
     "n": 3,
     "topic": "Filesystem",
     "level": "F",
-    "theory": "not-started",
-    "basic": "not-started",
+    "theory": "done",
+    "basic": "done",
     "intermediate": "not-started",
     "advanced": "not-started",
-    "troubleshooting": "not-started",
+    "troubleshooting": "done",
     "project": "not-started",
-    "assessment": "not-started"
+    "assessment": "done"
    },
    {
     "n": 4,
