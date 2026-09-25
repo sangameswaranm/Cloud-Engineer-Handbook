@@ -2,7 +2,11 @@
 
 **Status:** In Progress. Topics 1–2 complete (Session 01).
 
-**Approach:** distro-neutral. Commands are taught for all major Linux families; where a family differs, each variant is shown.
+**Focus:** Red Hat family (RHEL, Oracle Linux, Rocky, Alma).
+
+## Study guides
+
+- [Topic 1: Introduction](topic-01-introduction.md)
 
 ## Learning map and coverage
 

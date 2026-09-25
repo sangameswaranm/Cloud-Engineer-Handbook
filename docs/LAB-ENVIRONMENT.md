@@ -2,7 +2,6 @@
 
 | Item | Value |
 |---|---|
-| Approach | Distro-neutral: any Linux machine works (VM, cloud instance, WSL) |
-| Families covered | Red Hat (RHEL, Rocky, Alma, Fedora, Oracle, Amazon), Debian (Debian, Ubuntu), SUSE |
-
-Where families differ (package manager, firewall tool, admin group, security module), every variant is taught.
+| Focus | Red Hat family: RHEL, Oracle Linux, Rocky, Alma (decision D-11) |
+| Tools | dnf, rpm, grubby, firewalld, SELinux |
+| Practice | A Red Hat family VM for live labs; simulated servers for risky scenarios |

@@ -59,6 +59,7 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - tables
   - admonition
+  - pymdownx.details
   - pymdownx.highlight
   - pymdownx.superfences
   - toc:
@@ -80,6 +81,7 @@ nav:
   - Topics:
       - Linux:
           - Overview: 01-Linux/README.md
+          - "Topic 1: Introduction": 01-Linux/topic-01-introduction.md
           - Session 01 Intro & Architecture: 01-Linux/session-01-intro-architecture.md
       - Networking: 02-Networking/README.md
       - Bash: 03-Bash/README.md
