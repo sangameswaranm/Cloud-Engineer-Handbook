@@ -11,3 +11,14 @@
 `category` is one of `theory`, `lab`, `troubleshooting`, `project`.
 The Dashboard and the Progress page are both generated from these files.
 Entries are added only for real sessions.
+
+- `coverage.json` — per module, per topic: level (F/I/A/E) and status of each stage
+  (theory, basic, intermediate, advanced, troubleshooting, project, assessment).
+  Values: `not-started`, `in-progress`, `done`, `reinforce`.
+- `incidents.json` — every troubleshooting exercise solved:
+
+```json
+{"id": "INC-001", "date": "2026-09-26", "module": "Linux", "topic": "Permissions",
+ "symptom": "Permission denied reading app config", "root_cause": "Directory missing x bit for group",
+ "fix": "chmod g+x /opt/app", "page": "01-Linux/session-02-permissions.md"}
+```

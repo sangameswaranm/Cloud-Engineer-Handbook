@@ -65,11 +65,18 @@
   // ---- data ----
   const base = new URL("../data/", location.href);
   const get = (f) => fetch(new URL(f + "?t=" + Date.now(), base)).then((r) => { if (!r.ok) throw new Error(f + " returned " + r.status); return r.json(); });
-  Promise.all([get("progress.json"), get("sessions.json")])
-    .then(([p, s]) => render(p, Array.isArray(s) ? s : []))
+  Promise.all([get("progress.json"), get("sessions.json"), get("coverage.json").catch(() => null), get("incidents.json").catch(() => [])])
+    .then(([p, s, cov, inc]) => { render(p, Array.isArray(s) ? s : [], cov, Array.isArray(inc) ? inc : []); })
     .catch((e) => { $("ceh-foot").textContent = "Dashboard data did not load (" + e.message + "). Refresh the page to retry."; });
 
-  function render(p, S) {
+  function covPct(COV) {
+    if (!COV || !COV.modules) return 0;
+    let d = 0, t = 0;
+    Object.values(COV.modules).forEach((rows) => rows.forEach((r) => (COV.stages || []).forEach((st) => { t++; if (r[st] === "done") d++; })));
+    return t ? Math.round((d / t) * 100) : 0;
+  }
+
+  function render(p, S, COV, INC) {
     const domains = p.domains || [];
     const cur = p.current || {};
     const sum = (arr) => arr.reduce((a, x) => a + (Number(x.minutes) || 0), 0);
@@ -108,6 +115,8 @@
       { label: "This week", value: hrs(thisW) + " h", sub: lastW || thisW ? (thisW >= lastW ? "Up " : "Down ") + hrs(Math.abs(thisW - lastW)) + " h on last week" : "No sessions yet", trend: thisW - lastW },
       { label: "Streak", value: streak + (streak === 1 ? " day" : " days"), sub: days.length ? "Last session " + niceDate(days[0]) : "Starts with Session 1" },
       { label: "Domains started", value: started + "/" + domains.length, sub: domains.filter((d) => (LADDER[d.status] || 0) >= 90).length + " at project level or above" },
+      { label: "Coverage", value: covPct(COV) + "%", sub: "Topic stages done, all modules" },
+      { label: "Incidents solved", value: String(INC.length), sub: INC.length ? "Latest: " + INC[INC.length - 1].topic : "Break/fix exercises" },
     ];
     const box = $("ceh-kpis");
     kpis.forEach((k) => {
@@ -123,6 +132,77 @@
       }
       box.appendChild(c);
     });
+
+    // Study calendar (last 20 weeks, KSA days)
+    const perDay = {};
+    S.forEach((x) => { if (x.date) perDay[x.date] = (perDay[x.date] || 0) + (Number(x.minutes) || 0); });
+    const heat = $("ceh-heat");
+    const WEEKS = 20, start = thisMon - (WEEKS - 1) * 7 * DAY, todayT = toUTC(today());
+    let activeDays = 0;
+    for (let w = 0; w < WEEKS; w++) {
+      const col = el("div", "ceh-heat-col");
+      for (let d = 0; d < 7; d++) {
+        const t = start + (w * 7 + d) * DAY;
+        const key = new Date(t).toISOString().slice(0, 10);
+        const m = perDay[key] || 0;
+        if (m) activeDays++;
+        const lvl = m === 0 ? 0 : m <= 30 ? 1 : m <= 60 ? 2 : m <= 120 ? 3 : 4;
+        const c = el("i", "h" + lvl + (t > todayT ? " future" : "") + (t === todayT ? " today" : ""));
+        c.title = niceDate(key) + ": " + (m ? hrs(m) + " h" : "no study");
+        col.appendChild(c);
+      }
+      heat.appendChild(col);
+    }
+    $("ceh-heat-sum").textContent = activeDays + " study day" + (activeDays === 1 ? "" : "s") + " in 20 weeks";
+
+    // Topic coverage matrix
+    if (COV && COV.modules) {
+      const mods = Object.keys(COV.modules), STG = COV.stages || [];
+      const ABBR = { theory: "Th", basic: "Ba", intermediate: "In", advanced: "Ad", troubleshooting: "Tr", project: "Pr", assessment: "As" };
+      const mbox = $("ceh-covmods"), table = $("ceh-cov");
+      let mod = mods[0], showAll = false;
+      const more = el("button", "ceh-btn ceh-btn-quiet ceh-more");
+      more.onclick = () => { showAll = !showAll; drawCov(); };
+      table.parentNode.after(more);
+      const drawCov = () => {
+        table.innerHTML = "";
+        const rows = COV.modules[mod] || [];
+        const head = table.createTHead().insertRow();
+        head.appendChild(el("th", "ceh-cov-topic", "Topic"));
+        STG.forEach((st) => { const th = el("th", null, ABBR[st] || st); th.title = st; head.appendChild(th); });
+        const body = table.createTBody();
+        let done = 0, total = 0, next = null;
+        const curIdx = Math.max(0, rows.findIndex((r) => r.assessment !== "done"));
+        const lo = Math.max(0, curIdx - 1), hi = lo + 8;
+        rows.forEach((r, idx) => {
+          const visible = showAll || (idx >= lo && idx < hi);
+          const tr = body.insertRow();
+          if (!visible) tr.hidden = true;
+          if (idx === curIdx) tr.className = "is-current";
+          const td = el("td", "ceh-cov-topic");
+          td.appendChild(el("span", "ceh-cov-n", String(r.n)));
+          td.appendChild(document.createTextNode(r.topic));
+          td.appendChild(el("span", "ceh-lvl ceh-lvl-" + r.level, r.level));
+          tr.appendChild(td);
+          STG.forEach((st) => {
+            const v = r[st] || "not-started";
+            total++; if (v === "done") done++;
+            const c = el("td"); const dot = el("i", "cv cv-" + v); dot.title = r.topic + ", " + st + ": " + ((COV.values || {})[v] || v); c.appendChild(dot); tr.appendChild(c);
+          });
+          if (!next && r.assessment !== "done") next = r;
+        });
+        $("ceh-covsum").textContent = mod + ": " + Math.round((done / Math.max(1, total)) * 100) + "% of " + total + " stages done" + (next ? ". Current topic: " + next.n + ". " + next.topic : ". Module complete.");
+        more.textContent = showAll ? "Show fewer" : "Show all " + rows.length + " topics";
+        more.hidden = rows.length <= 8;
+        [...mbox.children].forEach((b) => b.setAttribute("aria-pressed", b.dataset.m === mod));
+      };
+      mods.forEach((m) => { const b = el("button", "ceh-chip", m); b.dataset.m = m; b.onclick = () => { mod = m; drawCov(); }; mbox.appendChild(b); });
+      drawCov();
+      const ck = $("ceh-covkey");
+      Object.entries(COV.values || {}).forEach(([k, v]) => { const sp = el("span"); sp.appendChild(el("i", "cv cv-" + k)); sp.appendChild(document.createTextNode(v)); ck.appendChild(sp); });
+      const lk = el("span", "ceh-muted", "Th Ba In Ad Tr Pr As: theory, basic, intermediate, advanced, troubleshooting, project, assessment. F/I/A/E: level.");
+      ck.appendChild(lk);
+    }
 
     // Rings
     const rings = $("ceh-rings"), legend = $("ceh-legend");

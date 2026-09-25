@@ -11,6 +11,8 @@ written up so it can be found again months later.
 
 **Method:** learn, execute, break, troubleshoot, document, build, assess.
 
+<div id="ceh-home" class="ceh-home"></div>
+
 <div class="grid cards" markdown>
 
 -   :material-view-dashboard-outline:{ .lg } **[Dashboard](dashboard.md)**
@@ -30,6 +32,18 @@ written up so it can be found again months later.
     ---
 
     First topic. Session notes, real output, and break/fix write-ups land here.
+
+-   :material-lifebuoy:{ .lg } **[Troubleshooting Index](TROUBLESHOOTING.md)**
+
+    ---
+
+    Every break/fix solved so far, searchable by symptom.
+
+-   :material-sitemap-outline:{ .lg } **[Knowledge + Task Map](KNOWLEDGE-MAP.md)**
+
+    ---
+
+    All 18 modules: concepts, tasks, master projects.
 
 -   :material-scale-balance:{ .lg } **[Decisions](DECISIONS.md)**
 

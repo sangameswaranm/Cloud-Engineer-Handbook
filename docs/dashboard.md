@@ -46,6 +46,22 @@ hide:
     <p id="ceh-tell" class="ceh-tell" hidden></p>
   </section>
 
+  <section class="ceh-panel" aria-label="Study calendar">
+    <div class="ceh-panel-head"><h2>Study calendar</h2><span class="ceh-muted ceh-small" id="ceh-heat-sum"></span></div>
+    <div class="ceh-heat-scroll"><div id="ceh-heat" class="ceh-heat"></div></div>
+    <div class="ceh-heat-key"><span>Less</span><i class="h0"></i><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><span>More</span></div>
+  </section>
+
+  <section class="ceh-panel" aria-label="Topic coverage">
+    <div class="ceh-panel-head">
+      <h2>Topic coverage</h2>
+      <div id="ceh-covmods" class="ceh-chips" role="group" aria-label="Module"></div>
+    </div>
+    <p id="ceh-covsum" class="ceh-covsum"></p>
+    <div class="ceh-scroll"><table id="ceh-cov" class="ceh-cov"></table></div>
+    <div class="ceh-key" id="ceh-covkey"></div>
+  </section>
+
   <div class="ceh-two">
     <section class="ceh-panel" aria-label="Time by activity">
       <div class="ceh-panel-head"><h2>Time by activity</h2></div>

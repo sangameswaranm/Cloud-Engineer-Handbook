@@ -7,6 +7,17 @@ def _load(config, name):
         return json.load(f)
 
 def on_page_markdown(markdown, page, config, files):
+    if "<!--COVERAGE:" in markdown:
+        cov = _load(config, "coverage.json")
+        import re
+        def table(m):
+            rows = cov["modules"].get(m.group(1), [])
+            st = cov["stages"]; names = cov["values"]
+            out = ["| # | Topic | Level | " + " | ".join(x.capitalize() for x in st) + " |", "|---|---|---|" + "---|" * len(st)]
+            for r in rows:
+                out.append(f"| {r['n']} | {r['topic']} | {r['level']} | " + " | ".join(names.get(r[x], r[x]) for x in st) + " |")
+            return "\n".join(out)
+        markdown = re.sub(r"<!--COVERAGE:([^>]+)-->", table, markdown)
     if page.file.src_uri != "PROGRESS.md":
         return markdown
     p = _load(config, "progress.json")
@@ -32,6 +43,6 @@ def on_config(config):
     combine a new page with an old cached script (GitHub Pages caches ~10 min)."""
     import time
     v = os.environ.get("GITHUB_SHA", str(int(time.time())))[:10]
-    config["extra_javascript"] = [f"{x}?v={v}" if "dashboard" in str(x) else x for x in config["extra_javascript"]]
+    config["extra_javascript"] = [f"{x}?v={v}" if ("dashboard" in str(x) or "site.js" in str(x)) else x for x in config["extra_javascript"]]
     config["extra_css"] = [f"{x}?v={v}" if "dashboard" in x else x for x in config["extra_css"]]
     return config
