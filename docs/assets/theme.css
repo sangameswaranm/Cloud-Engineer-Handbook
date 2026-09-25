@@ -21,3 +21,18 @@
 .md-typeset table:not([class]) { font-size: .72rem; border-radius: 8px; }
 .md-typeset .grid.cards > ul > li { border-radius: 10px; border-color: var(--ceh-line); }
 .md-typeset .grid.cards > ul > li:hover { border-color: var(--ceh-accent); box-shadow: none; }
+/* Login gate: content hidden until signed in (a curtain, not real security: the repo is public) */
+html:not(.ceh-ok) body > *:not(#ceh-gate) { visibility: hidden !important; }
+#ceh-gate { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 1rem; background: var(--ceh-page); }
+.ceh-gate-box { width: 100%; max-width: 22rem; background: var(--ceh-surface); border: 1px solid var(--ceh-line); border-radius: 14px; padding: 1.6rem 1.4rem; font-family: var(--md-text-font-family, sans-serif); color: var(--ceh-ink); }
+.ceh-gate-mark { color: var(--ceh-accent); font-size: 1.1rem; }
+.ceh-gate-box h1 { font-size: 1.15rem; font-weight: 600; margin: .3rem 0 .1rem; color: var(--ceh-ink); }
+.ceh-gate-sub { margin: 0 0 1.1rem; color: var(--ceh-muted); font-size: .8rem; }
+.ceh-gate-box label { display: block; font-size: .75rem; color: var(--ceh-muted); margin: .7rem 0; }
+.ceh-gate-box input:not([type=checkbox]) { display: block; width: 100%; box-sizing: border-box; margin-top: .3rem; padding: .6rem .7rem; font: inherit; font-size: .9rem; color: var(--ceh-ink); background: var(--ceh-page); border: 1px solid var(--ceh-line); border-radius: 8px; }
+.ceh-gate-box input:focus { outline: 2px solid var(--ceh-accent); outline-offset: 1px; }
+.ceh-gate-rem { display: flex !important; align-items: center; gap: .45rem; }
+.ceh-gate-box button { width: 100%; margin-top: .6rem; padding: .7rem; font: inherit; font-weight: 600; font-size: .85rem; border: 0; border-radius: 8px; background: var(--ceh-accent); color: #fff; cursor: pointer; }
+[data-md-color-scheme="slate"] .ceh-gate-box button { color: #0f161d; }
+.ceh-gate-err { color: #d2463c; font-size: .75rem; min-height: 1rem; margin: .6rem 0 0; }
+#ceh-logout { margin-left: .4rem; font: inherit; font-size: .65rem; color: var(--md-primary-bg-color); background: transparent; border: 1px solid rgba(255,255,255,.35); border-radius: 6px; padding: .25rem .55rem; cursor: pointer; white-space: nowrap; }

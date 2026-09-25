@@ -43,6 +43,6 @@ def on_config(config):
     combine a new page with an old cached script (GitHub Pages caches ~10 min)."""
     import time
     v = os.environ.get("GITHUB_SHA", str(int(time.time())))[:10]
-    config["extra_javascript"] = [f"{x}?v={v}" if ("dashboard" in str(x) or "site.js" in str(x)) else x for x in config["extra_javascript"]]
-    config["extra_css"] = [f"{x}?v={v}" if "dashboard" in x else x for x in config["extra_css"]]
+    config["extra_javascript"] = [f"{x}?v={v}" if ("dashboard" in str(x) or "site.js" in str(x) or "gate.js" in str(x)) else x for x in config["extra_javascript"]]
+    config["extra_css"] = [f"{x}?v={v}" if ("dashboard" in x or "theme" in x) else x for x in config["extra_css"]]
     return config

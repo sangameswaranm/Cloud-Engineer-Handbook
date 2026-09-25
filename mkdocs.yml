@@ -45,6 +45,7 @@ extra_css:
   - assets/dashboard.css
 
 extra_javascript:
+  - assets/gate.js
   - assets/dashboard.js
   - assets/site.js
 
