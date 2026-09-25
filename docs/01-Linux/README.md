@@ -2,13 +2,13 @@
 
 **Status:** In Progress (Session 1 started)
 
-**Lab VM:** `test-linux-01`, Oracle Linux Server 9.8 on OCI (see [Lab Environment](../LAB-ENVIRONMENT.md))
+**Approach:** distro-neutral. Commands are taught for all major Linux families; where a family differs, each variant is shown.
 
 ## Learning map
 
 | # | Section | Week | Status |
 |---|---|---|---|
-| 1 | Linux Introduction: what Linux is, why it exists, history, distributions, kernel vs release, LTS and lifecycle, Oracle Linux UEK vs RHCK | 1 | In Progress |
+| 1 | Linux Introduction: what Linux is, why it exists, history, distributions, kernel vs release, LTS and lifecycle | 1 | In Progress |
 | 2 | Linux Architecture: kernel/user space, system calls, boot flow, /proc /sys /dev | 1 | Not Started |
 | 3 | Shell & Command Anatomy: options, arguments, variables, PATH, stdin/stdout/stderr, pipes, redirection, exit codes | 1 | In Progress |
 | 4 | Filesystem Hierarchy | 1 | Not Started |
@@ -31,7 +31,3 @@
 
 ## Session notes
 - Session 1 — Linux Introduction (in progress)
-
-## Evidence so far
-Lab 1.1 (partial): `whoami` → `opc`; `id` → uid 1000, groups `adm` and `systemd-journal`, SELinux context present;
-`/etc/os-release` → Oracle Linux Server 9.8, `ID_LIKE="fedora"`, `platform:el9`. Pending: `pwd`, `uname -r`.

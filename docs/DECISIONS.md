@@ -10,4 +10,4 @@
 | D-06 | Program start | In DR designs, backup-software auxiliary copy is kept distinct from native Object Storage replication | They are different mechanisms with different behavior |
 | D-07 | 2026-09-24 | Handbook lives in a public GitHub repo, published with GitHub Pages | Portfolio evidence + live dashboard |
 | D-08 | 2026-09-24 | All real-world details are sanitized before commit | Public repo; protect client data |
-| D-09 | 2026-09-24 | Labs run on Oracle Linux in OCI | Matches the target platform (dnf, firewalld, SELinux) |
+| D-09 | 2026-09-25 | Linux is taught distro-neutral, with commands for every major family | Skills must work on any Linux flavour, not one VM |

@@ -2,13 +2,7 @@
 
 | Item | Value |
 |---|---|
-| Platform | OCI |
-| VM | `test-linux-01` |
-| OS | Oracle Linux Server 9.8 (`/etc/os-release`) |
-| Kernel | To be recorded (`uname -r`) |
-| Login user | `opc` (uid 1000; groups adm, systemd-journal) |
-| SELinux | Active (context shown in `id` output) |
-| Shape | To be recorded in Session 1 |
-| Access | SSH (method to be recorded in Session 1) |
+| Approach | Distro-neutral: any Linux machine works (VM, cloud instance, WSL) |
+| Families covered | Red Hat (RHEL, Rocky, Alma, Fedora, Oracle, Amazon), Debian (Debian, Ubuntu), SUSE |
 
-Oracle Linux specifics that affect the labs: `dnf` package manager, `firewalld`, SELinux enabled by default.
+Where families differ (package manager, firewall tool, admin group, security module), every variant is taught.
