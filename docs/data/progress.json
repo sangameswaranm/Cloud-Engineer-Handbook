@@ -4,7 +4,7 @@
   "current": {
     "month": 1,
     "week": 1,
-    "next_session": "Session 4 — Linux Topic 4: Files & Directories, then Mini Project 1"
+    "next_session": "Session 5 — Topic 4 Part D: reading files (cat, less, head, tail, tail -f)"
   },
   "domains": [
     {
@@ -174,7 +174,9 @@
     "Typing accuracy: use Tab completion (several typos caused 'command not found')",
     "Reading before/after evidence in incidents (read Incident 2B in reverse at first)",
     "Finishing answers: convert raw values into the unit a person needs (kB → GB)",
-    "Absolute paths must start with / (wrote opt/app/backups)"
+    "Absolute paths must start with / (wrote opt/app/backups)",
+    "Relative paths in cp/mv: FROM and TO both count from where you stand (check pwd first)",
+    "rm safety: a wrong relative path deletes something ELSE, and rm -rf never warns — use pwd, ls, absolute paths"
   ],
   "months": [
     {

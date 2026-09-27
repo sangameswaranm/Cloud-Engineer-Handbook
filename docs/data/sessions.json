@@ -94,5 +94,38 @@
     "minutes": 26,
     "result": "Topics 2 and 3 intermediate + advanced done; guides published",
     "notes": "Stopwatch total 1:41:13. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-27",
+    "start": "22:50",
+    "session": "S04",
+    "domain": "Linux",
+    "topic": "Interview warm-up; Topic 4 Parts A–C: mkdir/touch, cp/mv, rm/rmdir, home cleanup",
+    "category": "theory",
+    "minutes": 20,
+    "result": "Topic 4 Parts A–C done",
+    "notes": "No stopwatch. ~1:15 estimated from server file timestamps (19:59–20:56 GMT plus warm-up and cleanup). Split estimated."
+  },
+  {
+    "date": "2026-09-27",
+    "start": "22:50",
+    "session": "S04",
+    "domain": "Linux",
+    "topic": "Interview warm-up; Topic 4 Parts A–C: mkdir/touch, cp/mv, rm/rmdir, home cleanup",
+    "category": "lab",
+    "minutes": 45,
+    "result": "Topic 4 Parts A–C done",
+    "notes": "No stopwatch. ~1:15 estimated from server file timestamps (19:59–20:56 GMT plus warm-up and cleanup). Split estimated."
+  },
+  {
+    "date": "2026-09-27",
+    "start": "22:50",
+    "session": "S04",
+    "domain": "Linux",
+    "topic": "Interview warm-up; Topic 4 Parts A–C: mkdir/touch, cp/mv, rm/rmdir, home cleanup",
+    "category": "troubleshooting",
+    "minutes": 10,
+    "result": "Topic 4 Parts A–C done",
+    "notes": "No stopwatch. ~1:15 estimated from server file timestamps (19:59–20:56 GMT plus warm-up and cleanup). Split estimated."
   }
 ]
