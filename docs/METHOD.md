@@ -23,3 +23,9 @@ Diagrams are used wherever they make the mechanism clearer.
 - **Small steps.** One small idea, one small lab, then check understanding. Deep tools (like `strace`) wait for their topic.
 - **Label every incident:** 🧪 SCENARIO (pretend, real server not affected) or 🔧 LIVE LAB (real change, with the undo).
 - **A topic is complete only when the learner says it is clear**, not just when the lab ran.
+
+## Lesson order (updated 2026-09-27)
+
+1. What is it? → 2. Why do we use it? → 3. How does it work internally? → 4. Command syntax → 5. Basic examples →
+6. Real production example → 7. Hands-on VM task → 8. Failure/break scenario → 9. Troubleshooting →
+10. **Interview questions** (explain out loud, model answers in the guide) → 11. Admin task / challenge

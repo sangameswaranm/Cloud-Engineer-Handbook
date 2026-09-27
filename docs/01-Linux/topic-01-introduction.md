@@ -314,3 +314,28 @@ Answer without looking, then open each answer.
 
 ??? question "8. Why must you never edit /etc/os-release to make an installer work?"
     Other software reads it too; you'd give every program false information. Fix it with the vendor instead.
+
+---
+
+## Interview questions
+
+Answer out loud first, as if in an interview, then open the model answer.
+
+??? example "What is the difference between Linux and a Linux distribution?"
+    Linux is the kernel: it manages CPU, memory, devices and processes. A distribution such as RHEL or Oracle Linux packages that kernel with GNU tools, systemd, a package manager, defaults and a support lifecycle. Companies choose a distribution mainly for support and patching, not features.
+
+??? example "How do you quickly identify an unknown Linux server?"
+    `cat /etc/os-release` for distribution and release (ID, ID_LIKE, PLATFORM_ID), `uname -r` for the running kernel, `uname -m` for architecture, `hostnamectl` for a summary including virtualization. Then CPU from /proc/cpuinfo, memory from /proc/meminfo, disks from lsblk.
+
+??? example "A vendor supports 'RHEL 9 compatible, kernel 5.14+'. How do you confirm a server qualifies?"
+    Two conditions need two pieces of evidence: PLATFORM_ID=platform:el9 (or ID_LIKE) from /etc/os-release, and the kernel from uname -r. On Oracle Linux I'd also confirm whether the vendor supports UEK or only RHCK.
+
+??? example "What's the difference between RHCK and UEK on Oracle Linux?"
+    RHCK is the Red Hat Compatible Kernel, same versions as RHEL. UEK is Oracle's Unbreakable Enterprise Kernel, newer and the default on OCI images. Both can be installed; GRUB's default decides which boots. Some vendors only certify RHCK.
+
+??? example "An installer says 'Unsupported OS' on Rocky Linux 9. How do you approach it?"
+    Check /etc/os-release: the installer probably checks ID=rhel exactly, while Rocky reports ID=rocky with ID_LIKE and PLATFORM_ID showing compatibility. Confirm official vendor support and use their supported method or override. I would never edit /etc/os-release.
+
+??? example "Why does a VM show fewer CPUs than the processor name suggests?"
+    The model name describes the physical host CPU. The VM gets a slice: count the model name lines (vCPUs). On OCI AMD shapes 1 OCPU = 2 vCPUs.
+

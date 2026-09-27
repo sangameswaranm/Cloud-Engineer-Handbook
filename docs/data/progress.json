@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-09-27",
   "program_start": "2026-09-25",
   "current": {
     "month": 1,
     "week": 1,
-    "next_session": "Session 3 — Topic 2 intermediate (health snapshot), then Topics 2–3 advanced, then Topic 4"
+    "next_session": "Session 4 — Linux Topic 4: Files & Directories, then Mini Project 1"
   },
   "domains": [
     {

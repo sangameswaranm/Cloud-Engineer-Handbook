@@ -61,5 +61,38 @@
     "minutes": 28,
     "result": "Topic 3 assessed: pass. Topic 1 intermediate + advanced done.",
     "notes": "Stopwatch total 2:08:14. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-27",
+    "start": "21:05",
+    "session": "S03",
+    "domain": "Linux",
+    "topic": "Revision quiz; Topic 2 intermediate + advanced (kernel change window); Topic 3 intermediate + advanced",
+    "category": "theory",
+    "minutes": 20,
+    "result": "Topics 2 and 3 intermediate + advanced done; guides published",
+    "notes": "Stopwatch total 1:41:13. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-27",
+    "start": "21:05",
+    "session": "S03",
+    "domain": "Linux",
+    "topic": "Revision quiz; Topic 2 intermediate + advanced (kernel change window); Topic 3 intermediate + advanced",
+    "category": "lab",
+    "minutes": 55,
+    "result": "Topics 2 and 3 intermediate + advanced done; guides published",
+    "notes": "Stopwatch total 1:41:13. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-27",
+    "start": "21:05",
+    "session": "S03",
+    "domain": "Linux",
+    "topic": "Revision quiz; Topic 2 intermediate + advanced (kernel change window); Topic 3 intermediate + advanced",
+    "category": "troubleshooting",
+    "minutes": 26,
+    "result": "Topics 2 and 3 intermediate + advanced done; guides published",
+    "notes": "Stopwatch total 1:41:13. Category split estimated from session content."
   }
 ]

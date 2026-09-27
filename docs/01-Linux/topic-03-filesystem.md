@@ -216,3 +216,28 @@ Program  →  /usr/sbin/<name>  (services, admin tools)
 
 ??? question "7. A script works by hand but fails from an automatic job. First suspect?"
     A relative path. Replace it with an absolute path.
+
+---
+
+## Interview questions
+
+Answer out loud first, as if in an interview, then open the model answer.
+
+??? example "What is the FHS and why does it matter operationally?"
+    The Filesystem Hierarchy Standard defines where things live: config in /etc, variable data and logs in /var, programs in /usr/bin and /usr/sbin, third-party software in /opt. It lets you find config and logs on any Linux server quickly, which matters most during incidents.
+
+??? example "Absolute vs relative paths: why does it matter in scripts?"
+    An absolute path starts at / and works from anywhere. A relative path depends on the current directory. Scheduled jobs and services often start in a different directory, so relative paths that work by hand fail in automation. Scripts should use absolute paths.
+
+??? example "An application can't read its config. Where do you start looking?"
+    Confirm the config path (usually under /etc or the app's /opt directory), check the file exists with ls -l, check who runs the process and whether that user can read the file and every parent directory, and check the application's logs under /var/log.
+
+??? example "Where would you look for SSH login failures and sudo usage on RHEL?"
+    /var/log/secure, written by rsyslog. General system messages are in /var/log/messages. The SSH server config is /etc/ssh/sshd_config.
+
+??? example "What are /bin -> usr/bin style links and why do they exist?"
+    Modern RHEL merged /bin, /sbin and /lib into /usr; the old paths are kept as symbolic links so older scripts and tools keep working.
+
+??? example "Why is there no log file named after rsyslogd?"
+    rsyslogd is the logging daemon: it writes other logs, named by purpose, such as messages, secure and cron, according to /etc/rsyslog.conf.
+

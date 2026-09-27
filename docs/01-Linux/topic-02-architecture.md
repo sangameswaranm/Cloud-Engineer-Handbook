@@ -329,3 +329,31 @@ Size CPU-heavy workers to the vCPU count.
 
 ??? question "8. Why can SSH feel frozen when an app runs 96 CPU-heavy workers on 4 vCPUs?"
     Every process, including sshd, waits in the same CPU queue.
+
+---
+
+## Interview questions
+
+Answer out loud first, as if in an interview, then open the model answer.
+
+??? example "Explain kernel space and user space."
+    The kernel runs privileged and is the only code that touches hardware. All programs, even root's, run in user space and ask the kernel for resources through system calls. The kernel checks and decides, which isolates failures and enforces security. 'Permission denied' is the kernel's answer to a system call.
+
+??? example "Walk me through the Linux boot process."
+    Firmware checks hardware and starts GRUB; GRUB loads the default kernel and its initramfs; the kernel initialises hardware; initramfs provides drivers to mount the real root filesystem and hands over; systemd starts as PID 1 and brings up services until the target (multi-user) is reached; then sshd accepts logins.
+
+??? example "A server won't come back after a reboot. How do you narrow it down?"
+    Use the cloud serial console to see which stage stops: GRUB prompt, kernel panic or 'cannot mount root' (kernel/initramfs/disk), boot completes but services fail (systemd, fstab), or it's up but unreachable (network, firewall, sshd). Each stage points to a different fix.
+
+??? example "Patching is done and a reboot is planned. What do you check first?"
+    Compare `uname -r` with `grubby --default-kernel`. If the next-boot kernel differs, confirm it's supported by every agent and application. Take a baseline of application/agent health, fix the default if needed and verify it, reboot, then prove with uptime, uname -r and the application logs.
+
+??? example "How do you prove a server really rebooted, or that it didn't?"
+    /proc/uptime gives seconds since boot; a small value means it just booted. systemd-analyze shows that boot's duration. Comparing the boot time with a known change time gives evidence either way.
+
+??? example "Why do alerts on MemFree cause false alarms?"
+    Linux uses free RAM as page cache and releases it instantly. MemAvailable estimates what applications can actually use, so it's the right signal for memory alerts.
+
+??? example "How do you interpret a load average?"
+    It's the average number of runnable tasks over 1, 5 and 15 minutes. Compare it to the vCPU count: below is fine, above means queueing. The three numbers show the trend: 1-minute highest means rising.
+
