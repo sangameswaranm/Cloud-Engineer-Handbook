@@ -339,3 +339,46 @@ Answer out loud first, as if in an interview, then open the model answer.
 ??? example "Why does a VM show fewer CPUs than the processor name suggests?"
     The model name describes the physical host CPU. The VM gets a slice: count the model name lines (vCPUs). On OCI AMD shapes 1 OCPU = 2 vCPUs.
 
+### Command questions ("what would you type?")
+
+??? example "Show the distribution, its release and its family."
+    `cat /etc/os-release` → read `NAME`, `VERSION`, `ID`, `ID_LIKE`, `PLATFORM_ID`.
+
+??? example "Show the running kernel and the CPU architecture."
+    `uname -r` and `uname -m` (`x86_64` = Intel/AMD, `aarch64` = ARM).
+
+??? example "Prove the server is a VM and name the hypervisor."
+    `hostnamectl` → `Chassis: vm`, `Virtualization: kvm`.
+
+??? example "How many vCPUs does this VM have?"
+    `grep "model name" /proc/cpuinfo` and count the lines (not the core count in the chip name).
+
+??? example "How much memory can applications really use, in GB?"
+    `head -3 /proc/meminfo` → `MemAvailable` in kB ÷ 1,048,576.
+
+??? example "Show the disks and where / is mounted."
+    `lsblk` → read the `disk` line for size, and the line with `/` in MOUNTPOINTS.
+
+### Troubleshooting interview scenarios ("how would you investigate?")
+
+Say your steps out loud first, then compare.
+
+??? example "A vendor installer says 'Unsupported OS' on a RHEL 9 compatible server."
+    1. `cat /etc/os-release` → note `ID`, `ID_LIKE`, `PLATFORM_ID`.
+    2. Compare with what the installer checks (vendor docs or installer message).
+    3. If it checks `ID="rhel"` only, the server fails on name, not on compatibility.
+    4. Confirm official support with the vendor; use their supported method or override.
+    5. Never edit `/etc/os-release`. Document the finding.
+
+??? example "An agent is 'supported on RHEL 9' but won't start on an Oracle Linux 9 server."
+    1. `cat /etc/os-release` → confirm `platform:el9`.
+    2. `uname -r` → check for `uek` in the kernel name.
+    3. Read the agent's log under `/var/log` for kernel-related errors.
+    4. If the vendor supports only RHCK, set the RHCK kernel as default (`grubby`), reboot in a window, verify with `uname -r`.
+    5. Otherwise ask the vendor for a UEK-supported build.
+
+??? example "Developers say the server is 'huge' and plan 96 workers."
+    1. `grep "model name" /proc/cpuinfo` → count lines (vCPUs).
+    2. `head -3 /proc/meminfo` → available memory.
+    3. Explain the chip name is the physical host; size workers to the VM's vCPUs and memory.
+

@@ -241,3 +241,49 @@ Answer out loud first, as if in an interview, then open the model answer.
 ??? example "Why is there no log file named after rsyslogd?"
     rsyslogd is the logging daemon: it writes other logs, named by purpose, such as messages, secure and cron, according to /etc/rsyslog.conf.
 
+### Command questions ("what would you type?")
+
+??? example "Where am I, and how do I go back to the previous folder?"
+    `pwd`, then `cd -`.
+
+??? example "List /etc/ssh with details without leaving /var/log."
+    `ls -l ../../etc/ssh` (relative) or `ls -l /etc/ssh` (absolute).
+
+??? example "Go to your home folder in one command."
+    `cd` (or `cd ~`).
+
+??? example "Prove the SSH server config exists and see who can read it."
+    `ls -l /etc/ssh/sshd_config` → `-rw-------` root only.
+
+??? example "Find which log records SSH logins and sudo usage."
+    `ls -l /var/log/secure`.
+
+??? example "Show where /bin really points."
+    `ls -l /` → `bin -> usr/bin`.
+
+### Troubleshooting interview scenarios ("how would you investigate?")
+
+Say your steps out loud first, then compare.
+
+??? example "A backup script works by hand but fails at night with 'No such file or directory'."
+    1. Read the script for `cd` or file paths without a leading `/`.
+    2. Reproduce: run the same command from a different folder (e.g. `cd ~` first) → it fails.
+    3. Root cause: relative path; the scheduled run starts elsewhere.
+    4. Fix: use absolute paths (`/opt/app/backups`), test from `/` and from home.
+
+??? example "An application can't find its config file."
+    1. Find the expected path in the app's docs/logs (`/etc/<app>` or `/opt/<app>`).
+    2. `ls -l <full path>` → does it exist? Typo? Wrong folder?
+    3. If it exists, check the parent folders with `ls -l` along the path (permissions: Topic 6).
+    4. Check the app log under `/var/log` for the exact path it tried.
+
+??? example "On call: users can't log in via SSH. Where do you look first?"
+    1. `/var/log/secure` → authentication and SSH messages (needs sudo to read).
+    2. `/etc/ssh/sshd_config` → the SSH server settings (read-only check).
+    3. `/usr/sbin/sshd` exists? (`ls -l`). Service status comes in Topic 10.
+
+??? example "A command with a relative path did something in the wrong folder."
+    1. `pwd` → where were you really?
+    2. Resolve the path step by step from there.
+    3. Prevention: predict relative paths before pressing Enter; use absolute paths for anything destructive.
+

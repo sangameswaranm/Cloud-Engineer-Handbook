@@ -357,3 +357,58 @@ Answer out loud first, as if in an interview, then open the model answer.
 ??? example "How do you interpret a load average?"
     It's the average number of runnable tasks over 1, 5 and 15 minutes. Compare it to the vCPU count: below is fine, above means queueing. The three numbers show the trend: 1-minute highest means rising.
 
+### Command questions ("what would you type?")
+
+??? example "Which program is PID 1?"
+    `ps -p 1 -o comm=` → `systemd`.
+
+??? example "How long did the last boot take, per stage?"
+    `systemd-analyze`.
+
+??? example "List installed kernels, show the running one and the next-boot one."
+    `ls /boot` (vmlinuz-*), `uname -r`, `sudo grubby --default-kernel`.
+
+??? example "Make a specific kernel the default for the next boot."
+    `sudo grubby --set-default /boot/vmlinuz-<version>` then verify with `sudo grubby --default-kernel`.
+
+??? example "How long has the server been up, in hours?"
+    `cat /proc/uptime` → first number ÷ 3600.
+
+??? example "Is the CPU overloaded right now?"
+    `cat /proc/loadavg` → compare the three averages with the vCPU count from `/proc/cpuinfo`.
+
+??? example "Show the network interfaces the kernel knows."
+    `ls /sys/class/net`.
+
+### Troubleshooting interview scenarios ("how would you investigate?")
+
+Say your steps out loud first, then compare.
+
+??? example "After patching and reboot, the backup agent is down."
+    1. `cat /proc/uptime` → confirm the reboot happened and when.
+    2. `uname -r` → which kernel is running now?
+    3. `sudo grubby --default-kernel` and `ls /boot` → did the default kernel change? Which kernels exist?
+    4. Agent log in `/var/log/<agent>` → look for kernel/module errors.
+    5. If the kernel changed to an unsupported one: `grubby --set-default` the supported kernel, verify, reboot in a window.
+    6. Post-check: uptime, `uname -r`, agent log. Add the pre-reboot kernel check to the patch runbook.
+
+??? example "Someone claims the server was rebooted last night; the app team doubts it."
+    1. `cat /proc/uptime` → seconds since boot; convert to hours and work out the boot time.
+    2. `systemd-analyze` → duration of that boot.
+    3. Compare with the change window. Small uptime inside the window = rebooted; large = it wasn't.
+
+??? example "The server boots much slower than usual after a change."
+    1. `systemd-analyze` → compare with your baseline: which stage grew (kernel, initrd, userspace)?
+    2. Userspace grew → a service is slow or waiting (Topic 10: `systemd-analyze blame`).
+    3. Kernel/initrd grew → kernel or driver change; compare `uname -r` with before.
+
+??? example "'Memory low' alert, but the application is fine."
+    1. `head -3 /proc/meminfo` → compare `MemFree` with `MemAvailable`.
+    2. Low Free + healthy Available = cache, not a real shortage.
+    3. Fix the alert to use MemAvailable.
+
+??? example "The server is 'very slow' and even SSH lags."
+    1. `cat /proc/loadavg` → compare with vCPU count; check whether rising.
+    2. `grep "model name" /proc/cpuinfo` → vCPU count.
+    3. Load far above vCPUs = CPU queueing; find the heavy processes next (Topic 9).
+
