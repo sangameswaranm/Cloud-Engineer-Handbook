@@ -83,6 +83,8 @@ nav:
       - Linux:
           - Overview: 01-Linux/README.md
           - "Topic 1: Introduction": 01-Linux/topic-01-introduction.md
+          - "Topic 2: Architecture": 01-Linux/topic-02-architecture.md
+          - "Topic 3: Filesystem": 01-Linux/topic-03-filesystem.md
           - Session 01 Intro & Architecture: 01-Linux/session-01-intro-architecture.md
       - Networking: 02-Networking/README.md
       - Bash: 03-Bash/README.md

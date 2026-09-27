@@ -42,5 +42,27 @@
     "root_cause": "The 96 cores belong to the physical host; the VM has 4 vCPUs (4 model name lines)",
     "fix": "Size workers to the VM's vCPUs; 96 CPU-heavy workers on 4 vCPUs queue and make the server extremely slow.",
     "page": "01-Linux/session-01-intro-architecture.md"
+  },
+  {
+    "id": "INC-005",
+    "date": "2026-09-27",
+    "module": "Linux",
+    "topic": "Architecture (reboot)",
+    "type": "simulated",
+    "symptom": "Backup agent down after reboot in change window: unsupported kernel",
+    "root_cause": "Next-boot kernel had been changed to 5.14 by patching; reboot done without comparing uname -r and grubby --default-kernel",
+    "fix": "grubby --set-default /boot/vmlinuz-6.12…, verify, reboot, check uptime + uname -r + agent log. Runbook added.",
+    "page": "01-Linux/topic-02-architecture.md"
+  },
+  {
+    "id": "INC-006",
+    "date": "2026-09-26",
+    "module": "Linux",
+    "topic": "Filesystem",
+    "type": "tabletop",
+    "symptom": "Backup script works by hand, fails at night: No such file or directory",
+    "root_cause": "Relative path 'cd backups'; automatic run starts in a different folder",
+    "fix": "Use the absolute path cd /opt/app/backups",
+    "page": "01-Linux/topic-03-filesystem.md"
   }
 ]

@@ -7,6 +7,8 @@
 ## Study guides
 
 - [Topic 1: Introduction](topic-01-introduction.md)
+- [Topic 2: Linux Architecture](topic-02-architecture.md)
+- [Topic 3: Filesystem](topic-03-filesystem.md)
 
 ## Learning map and coverage
 
