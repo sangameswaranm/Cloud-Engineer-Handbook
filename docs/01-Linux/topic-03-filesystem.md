@@ -217,6 +217,18 @@ Program  →  /usr/sbin/<name>  (services, admin tools)
 ??? question "7. A script works by hand but fails from an automatic job. First suspect?"
     A relative path. Replace it with an absolute path.
 
+
+---
+
+## Incident reports
+
+Written in the [senior root cause format](../ROOT-CAUSE-GUIDE.md).
+
+!!! danger "INC-006 · Backup script works by hand, fails at night (tabletop)"
+    **Evidence:** works from `/opt/app`; fails from any other folder with No such file or directory.
+    **Root cause:** the script uses a relative path (`cd backups`), and the scheduled run starts in a different folder.
+    **Fix:** `cd /opt/app/backups` (absolute). **Prevention:** absolute paths in every script and scheduled job; test from `/` and from home.
+
 ---
 
 ## Interview questions

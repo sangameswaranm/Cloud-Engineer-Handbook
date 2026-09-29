@@ -74,6 +74,7 @@ nav:
       - Roadmap: ROADMAP.md
       - Knowledge + Task Map: KNOWLEDGE-MAP.md
       - Teaching Method: METHOD.md
+      - Root Cause Guide: ROOT-CAUSE-GUIDE.md
       - Progress: PROGRESS.md
       - Daily Log: DAILY-LOG.md
       - Decisions: DECISIONS.md
@@ -85,6 +86,7 @@ nav:
           - "Topic 1: Introduction": 01-Linux/topic-01-introduction.md
           - "Topic 2: Architecture": 01-Linux/topic-02-architecture.md
           - "Topic 3: Filesystem": 01-Linux/topic-03-filesystem.md
+          - "Topic 4: Files & Directories": 01-Linux/topic-04-files.md
           - Session 01 Intro & Architecture: 01-Linux/session-01-intro-architecture.md
       - Networking: 02-Networking/README.md
       - Bash: 03-Bash/README.md

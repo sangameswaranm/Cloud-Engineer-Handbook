@@ -330,6 +330,35 @@ Size CPU-heavy workers to the vCPU count.
 ??? question "8. Why can SSH feel frozen when an app runs 96 CPU-heavy workers on 4 vCPUs?"
     Every process, including sshd, waits in the same CPU queue.
 
+
+---
+
+## Incident reports
+
+Written in the [senior root cause format](../ROOT-CAUSE-GUIDE.md).
+
+!!! danger "INC-002 · 'cat is broken': Permission denied on /etc/shadow (live)"
+    **Evidence:** `cat /etc/hostname` works; `cat /etc/shadow` is denied: same program, different file.
+    **Root cause:** the kernel refuses access based on the file's permissions (`----------`); `cat` only reports the answer.
+    **Fix:** none needed for `cat`. **Prevention:** change one thing and compare before blaming a tool.
+
+!!! danger "INC-003 · Agent broken after monthly patching (tabletop)"
+    **Evidence:** `uname -r` → 5.14; `grubby --default-kernel` → 5.14 (was 6.12).
+    **Root cause:** patching changed GRUB's default kernel to 5.14, which the agent doesn't support, and the reboot happened without a pre-check.
+    **Fix:** `grubby --set-default` the supported kernel, verify, reboot, prove with `uname -r` + agent log.
+    **Prevention:** pre-reboot kernel check in the patching runbook.
+
+!!! danger "INC-004 · 96 workers planned on a 4 vCPU VM (tabletop)"
+    **Evidence:** `/proc/cpuinfo` has 4 `model name` lines; the chip name says 96-core.
+    **Root cause:** the physical host's core count was mistaken for the VM's vCPUs.
+    **Fix / prevention:** size CPU-heavy workers to the VM's vCPUs; measure load against vCPU count.
+
+!!! danger "INC-005 · Backup agent down after a change-window reboot (simulated)"
+    **Timeline:** rebooted without checking the next-boot kernel → booted 5.14 → agent `ERROR unsupported kernel` → set 6.12 default → second reboot → recovered (uptime 41 s).
+    **Root cause:** patching had changed the next-boot kernel, and the runbook had no step comparing running vs next-boot kernel (see the 5 Whys in the [root cause guide](../ROOT-CAUSE-GUIDE.md)).
+    **Impact:** two reboots instead of one; backups down in between.
+    **Prevention:** runbook steps 2 and 6 (check default kernel; verify the fix before rebooting).
+
 ---
 
 ## Interview questions

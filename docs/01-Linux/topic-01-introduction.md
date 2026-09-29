@@ -315,6 +315,19 @@ Answer without looking, then open each answer.
 ??? question "8. Why must you never edit /etc/os-release to make an installer work?"
     Other software reads it too; you'd give every program false information. Fix it with the vendor instead.
 
+
+---
+
+## Incident reports
+
+Written in the [senior root cause format](../ROOT-CAUSE-GUIDE.md).
+
+!!! danger "INC-001 · Installer says 'Unsupported OS' on a RHEL 9 compatible server (live)"
+    **Evidence:** `cat /etc/os-release` → `ID="ol"`, `ID_LIKE="fedora"`, `PLATFORM_ID="platform:el9"`.
+    **Root cause:** the installer checks the exact name `ID="rhel"` instead of compatibility (`ID_LIKE`/`PLATFORM_ID`), so it rejects a compatible system.
+    **Fix:** confirm vendor support; use the vendor's supported installer or official override. Never edit `/etc/os-release`.
+    **Prevention:** check the vendor support matrix (OS release **and** kernel, RHCK vs UEK) before planning installs.
+
 ---
 
 ## Interview questions

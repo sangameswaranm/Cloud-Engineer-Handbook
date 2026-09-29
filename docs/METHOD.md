@@ -29,3 +29,7 @@ Diagrams are used wherever they make the mechanism clearer.
 1. What is it? → 2. Why do we use it? → 3. How does it work internally? → 4. Command syntax → 5. Basic examples →
 6. Real production example → 7. Hands-on VM task → 8. Failure/break scenario → 9. Troubleshooting →
 10. **Interview questions** (explain out loud, model answers in the guide) → 11. Admin task / challenge
+
+## Incidents in every topic
+
+Every topic (this module and all future ones) includes numbered incidents (INC-XXX) written in the [senior root cause format](ROOT-CAUSE-GUIDE.md): symptom, evidence, root cause (one-line formula), fix, verification, prevention.

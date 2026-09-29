@@ -74,7 +74,7 @@
     "symptom": "Search for config files looked complete but missed files (e.g. /etc/ssh/sshd_config.d/*.conf)",
     "root_cause": "find ran as a normal user; protected folders gave Permission denied and were skipped",
     "fix": "Search system folders with sudo find; treat Permission denied lines as a warning that results are incomplete",
-    "page": "01-Linux/README.md"
+    "page": "01-Linux/topic-04-files.md"
   },
   {
     "id": "INC-008",
@@ -85,7 +85,7 @@
     "symptom": "cat shortcut.txt: No such file or directory, although the file is listed by ls",
     "root_cause": "Broken symbolic link: its target readme.txt was renamed",
     "fix": "ls -l shows the target path; restore/rename the target or recreate the link with ln -s",
-    "page": "01-Linux/README.md"
+    "page": "01-Linux/topic-04-files.md"
   },
   {
     "id": "INC-009",
@@ -96,6 +96,17 @@
     "symptom": "App fails at startup: touch app/logs/app.log → No such file or directory",
     "root_cause": "Deployment never created the log directory app/logs; touch cannot create parent directories. Typos in the deployment (confg, app.cong) would also have broken config loading.",
     "fix": "mkdir -p app/logs; rename confg→config and app.cong→app.conf with mv; verify with the app's exact command. Prevention: mkdir -p every required folder in the deployment steps; copy-paste reviewed commands.",
-    "page": "01-Linux/README.md"
+    "page": "01-Linux/topic-04-files.md"
+  },
+  {
+    "id": "INC-010",
+    "date": "2026-09-29",
+    "module": "Linux",
+    "topic": "Files (copy)",
+    "type": "live",
+    "symptom": "Web app won't start: 'port not set'",
+    "root_cause": "An empty template (web.conf.new) was copied over the live web.conf (wrong direction, no -i), leaving it empty",
+    "fix": "Kept web.conf.broken as evidence, restored from web.conf.bak-20260929, verified port=8080. Prevention: cp -i for configs, check FROM/TO, dated backups.",
+    "page": "01-Linux/topic-04-files.md"
   }
 ]

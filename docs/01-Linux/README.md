@@ -9,6 +9,7 @@
 - [Topic 1: Introduction](topic-01-introduction.md)
 - [Topic 2: Linux Architecture](topic-02-architecture.md)
 - [Topic 3: Filesystem](topic-03-filesystem.md)
+- [Topic 4: Files & Directories](topic-04-files.md) (in progress)
 
 ## Learning map and coverage
 
