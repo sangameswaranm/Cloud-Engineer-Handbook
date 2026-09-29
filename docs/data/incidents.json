@@ -64,5 +64,27 @@
     "root_cause": "Relative path 'cd backups'; automatic run starts in a different folder",
     "fix": "Use the absolute path cd /opt/app/backups",
     "page": "01-Linux/topic-03-filesystem.md"
+  },
+  {
+    "id": "INC-007",
+    "date": "2026-09-29",
+    "module": "Linux",
+    "topic": "Files (find)",
+    "type": "live",
+    "symptom": "Search for config files looked complete but missed files (e.g. /etc/ssh/sshd_config.d/*.conf)",
+    "root_cause": "find ran as a normal user; protected folders gave Permission denied and were skipped",
+    "fix": "Search system folders with sudo find; treat Permission denied lines as a warning that results are incomplete",
+    "page": "01-Linux/README.md"
+  },
+  {
+    "id": "INC-008",
+    "date": "2026-09-29",
+    "module": "Linux",
+    "topic": "Files (links)",
+    "type": "live",
+    "symptom": "cat shortcut.txt: No such file or directory, although the file is listed by ls",
+    "root_cause": "Broken symbolic link: its target readme.txt was renamed",
+    "fix": "ls -l shows the target path; restore/rename the target or recreate the link with ln -s",
+    "page": "01-Linux/README.md"
   }
 ]

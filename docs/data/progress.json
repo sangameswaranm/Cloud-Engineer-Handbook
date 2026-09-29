@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-27",
+  "updated": "2026-09-29",
   "program_start": "2026-09-25",
   "current": {
     "month": 1,
     "week": 1,
-    "next_session": "Session 5 — Topic 4 Part D: reading files (cat, less, head, tail, tail -f)"
+    "next_session": "Session 6 — Topic 4 Part G: the vi editor, then Topic 4 wrap-up and Mini Project 1"
   },
   "domains": [
     {
@@ -176,7 +176,9 @@
     "Finishing answers: convert raw values into the unit a person needs (kB → GB)",
     "Absolute paths must start with / (wrote opt/app/backups)",
     "Relative paths in cp/mv: FROM and TO both count from where you stand (check pwd first)",
-    "rm safety: a wrong relative path deletes something ELSE, and rm -rf never warns — use pwd, ls, absolute paths"
+    "rm safety: a wrong relative path deletes something ELSE, and rm -rf never warns — use pwd, ls, absolute paths",
+    "echo without > only prints; echo \"text\" > file saves (missed twice)",
+    "Quotes must be in pairs: an odd number leaves a > prompt waiting (happened twice)"
   ],
   "months": [
     {

@@ -127,5 +127,38 @@
     "minutes": 10,
     "result": "Topic 4 Parts A–C done",
     "notes": "No stopwatch. ~1:15 estimated from server file timestamps (19:59–20:56 GMT plus warm-up and cleanup). Split estimated."
+  },
+  {
+    "date": "2026-09-29",
+    "start": "21:58",
+    "session": "S05",
+    "domain": "Linux",
+    "topic": "Recap + quiz; Topic 4 Parts D–F: reading files, find, links and inodes",
+    "category": "theory",
+    "minutes": 25,
+    "result": "Topic 4 Parts D–F done",
+    "notes": "Stopwatch total 1:35:30. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-29",
+    "start": "21:58",
+    "session": "S05",
+    "domain": "Linux",
+    "topic": "Recap + quiz; Topic 4 Parts D–F: reading files, find, links and inodes",
+    "category": "lab",
+    "minutes": 55,
+    "result": "Topic 4 Parts D–F done",
+    "notes": "Stopwatch total 1:35:30. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-29",
+    "start": "21:58",
+    "session": "S05",
+    "domain": "Linux",
+    "topic": "Recap + quiz; Topic 4 Parts D–F: reading files, find, links and inodes",
+    "category": "troubleshooting",
+    "minutes": 15,
+    "result": "Topic 4 Parts D–F done",
+    "notes": "Stopwatch total 1:35:30. Category split estimated from session content."
   }
 ]
