@@ -86,5 +86,16 @@
     "root_cause": "Broken symbolic link: its target readme.txt was renamed",
     "fix": "ls -l shows the target path; restore/rename the target or recreate the link with ln -s",
     "page": "01-Linux/README.md"
+  },
+  {
+    "id": "INC-009",
+    "date": "2026-09-29",
+    "module": "Linux",
+    "topic": "Files (create/move)",
+    "type": "live",
+    "symptom": "App fails at startup: touch app/logs/app.log → No such file or directory",
+    "root_cause": "Deployment never created the log directory app/logs; touch cannot create parent directories. Typos in the deployment (confg, app.cong) would also have broken config loading.",
+    "fix": "mkdir -p app/logs; rename confg→config and app.cong→app.conf with mv; verify with the app's exact command. Prevention: mkdir -p every required folder in the deployment steps; copy-paste reviewed commands.",
+    "page": "01-Linux/README.md"
   }
 ]
