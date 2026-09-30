@@ -88,6 +88,11 @@ hide:
     <div class="ceh-key" id="ceh-key"></div>
   </section>
 
+  <section class="ceh-panel" aria-label="Certifications">
+    <div class="ceh-panel-head"><h2>Certifications</h2><span id="ceh-cert-sum" class="ceh-pos"></span></div>
+    <ol id="ceh-certs" class="ceh-certs"></ol>
+  </section>
+
   <section class="ceh-panel" aria-label="Recent sessions">
     <div class="ceh-panel-head"><h2>Recent sessions</h2><a class="ceh-link" href="../DAILY-LOG/">Daily log</a></div>
     <ol id="ceh-feed" class="ceh-feed"></ol>

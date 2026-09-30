@@ -65,6 +65,17 @@
   // ---- data ----
   const base = new URL("../data/", location.href);
   const get = (f) => fetch(new URL(f + "?t=" + Date.now(), base)).then((r) => { if (!r.ok) throw new Error(f + " returned " + r.status); return r.json(); });
+  get("certs.json").then((C) => {
+    const box = $("ceh-certs"); if (!box || !Array.isArray(C)) return;
+    const done = C.filter((c) => c.status === "Passed").length;
+    $("ceh-cert-sum").textContent = done + " of " + C.filter((c) => c.status !== "Optional").length + " passed";
+    C.sort((a, b) => a.order - b.order).forEach((c) => {
+      const li = el("li", "ceh-cert ceh-cert-" + slug(c.status));
+      li.appendChild(el("span", "ceh-cert-n", String(c.order)));
+      const tx = el("div", "ceh-cert-tx"); tx.appendChild(el("strong", null, c.name)); tx.appendChild(el("span", null, c.vendor + " · " + c.module + (c.note ? " · " + c.note : "")));
+      li.appendChild(tx); li.appendChild(el("span", "ceh-status ceh-cs-" + slug(c.status), c.status)); box.appendChild(li);
+    });
+  }).catch(() => {});
   Promise.all([get("progress.json"), get("sessions.json"), get("coverage.json").catch(() => null), get("incidents.json").catch(() => [])])
     .then(([p, s, cov, inc]) => { render(p, Array.isArray(s) ? s : [], cov, Array.isArray(inc) ? inc : []); })
     .catch((e) => { $("ceh-foot").textContent = "Dashboard data did not load (" + e.message + "). Refresh the page to retry."; });

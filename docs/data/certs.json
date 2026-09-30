@@ -1,0 +1,98 @@
+[
+  {
+    "name": "RHCSA",
+    "vendor": "Red Hat",
+    "module": "Linux",
+    "order": 1,
+    "status": "Planned",
+    "note": "After the Linux sprint; hands-on exam"
+  },
+  {
+    "name": "OCI Architect Associate",
+    "vendor": "Oracle",
+    "module": "OCI",
+    "order": 2,
+    "status": "Planned",
+    "note": "Quick win with OCI experience"
+  },
+  {
+    "name": "AZ-104 Azure Administrator",
+    "vendor": "Microsoft",
+    "module": "Azure",
+    "order": 3,
+    "status": "Planned",
+    "note": ""
+  },
+  {
+    "name": "Terraform Associate (004)",
+    "vendor": "HashiCorp",
+    "module": "Terraform",
+    "order": 4,
+    "status": "Planned",
+    "note": ""
+  },
+  {
+    "name": "OCI Networking Professional",
+    "vendor": "Oracle",
+    "module": "Networking",
+    "order": 5,
+    "status": "Planned",
+    "note": "Specialty"
+  },
+  {
+    "name": "AZ-305 Solutions Architect Expert",
+    "vendor": "Microsoft",
+    "module": "Architecture",
+    "order": 6,
+    "status": "Planned",
+    "note": "Needs AZ-104"
+  },
+  {
+    "name": "OCI Architect Professional",
+    "vendor": "Oracle",
+    "module": "OCI",
+    "order": 7,
+    "status": "Planned",
+    "note": "Hands-on exam"
+  },
+  {
+    "name": "CKA",
+    "vendor": "Linux Foundation",
+    "module": "Kubernetes",
+    "order": 8,
+    "status": "Planned",
+    "note": ""
+  },
+  {
+    "name": "Veeam VMCE",
+    "vendor": "Veeam",
+    "module": "Backup/DR",
+    "order": 9,
+    "status": "Planned",
+    "note": ""
+  },
+  {
+    "name": "ITIL 4 Foundation",
+    "vendor": "PeopleCert",
+    "module": "Operations",
+    "order": 10,
+    "status": "Planned",
+    "note": ""
+  },
+  {
+    "name": "AWS Solutions Architect Associate",
+    "vendor": "AWS",
+    "module": "Architecture",
+    "order": 11,
+    "status": "Planned",
+    "note": "Year 3"
+  },
+  {
+    "name": "TOGAF",
+    "vendor": "The Open Group",
+    "module": "Architecture",
+    "order": 12,
+    "status": "Optional",
+    "note": "Year 3–4"
+  }
+]

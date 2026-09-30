@@ -178,3 +178,12 @@ i.cv-in-progress { background: #e0a526; } i.cv-done { background: #0b9a93; } i.c
 .md-typeset .ceh-cov .ceh-cov-topic { white-space: normal; }
 .md-typeset .ceh-cov th, .md-typeset .ceh-cov td { min-width: 1.25rem; padding: .22rem .15rem; }
 .ceh-cov-n { width: 1.2rem; }
+
+.md-typeset ol.ceh-certs { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.ceh-cert { display: grid; grid-template-columns: 1.6rem 1fr auto; align-items: center; gap: .6rem; padding: .5rem .6rem; border: 1px solid var(--ceh-line); border-radius: 10px; }
+.ceh-cert-n { width: 1.5rem; height: 1.5rem; border-radius: 50%; display: grid; place-items: center; font-size: .62rem; font-weight: 700; background: var(--ceh-line); color: var(--ceh-muted); }
+.ceh-cert-tx { display: flex; flex-direction: column; min-width: 0; }
+.ceh-cert-tx strong { font-size: .72rem; } .ceh-cert-tx span { font-size: .6rem; color: var(--ceh-muted); }
+.ceh-cert-passed .ceh-cert-n { background: #0b9a93; color: #fff; }
+.ceh-cs-studying { background: #fdf1d6; color: #7a5600; } .ceh-cs-booked { background: #e2ecfc; color: #1f4fa3; }
+.ceh-cs-passed { background: #dff2e6; color: #1d6b3d; } .ceh-cs-optional { background: transparent; border: 1px dashed var(--ceh-line); }
