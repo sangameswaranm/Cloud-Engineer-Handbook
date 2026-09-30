@@ -40,6 +40,8 @@ Broad knowledge across all areas, **deep** in 2–3 specialties: **cloud network
 |---|---|---|
 | Year 1 | AZ-104 Azure Administrator | Azure foundation |
 | Year 1 | OCI Architect Associate | Quick win with OCI experience |
+| Year 1 | **RHCSA** (optional) | Hands-on proof of Linux admin, right after the Linux sprint |
+| Year 1–2 | **OCI Networking Professional** | Matches the cloud-networking specialty |
 | Year 1–2 | Terraform Associate | Automation proof |
 | Year 2 | **AZ-305 Azure Solutions Architect Expert** | Key architect credential |
 | Year 2 | OCI Architect Professional | Architect-level OCI |
@@ -47,8 +49,12 @@ Broad knowledge across all areas, **deep** in 2–3 specialties: **cloud network
 | Year 2–3 | ITIL 4 Foundation | Expected in many infra roles (Gulf) |
 | Year 3 | AWS Solutions Architect Associate → Professional | Multi-cloud expected for solution architects |
 | Year 3–4 | TOGAF (optional) | Enterprise architecture direction |
-| Optional | AZ-700, AZ-500, Veeam VMCE | Strengthen specialties |
+| Optional | AZ-700 (networking), **SC-500** (replaces AZ-500), **AZ-802** (Windows Server, replaces AZ-800/801), **AI-103** (AI agents), Veeam VMCE | Strengthen specialties |
 
 ## Portfolio (built continuously)
 
 This handbook, hands-on projects (OCI, Azure, IaC, Kubernetes, AI ops), a blog series from real incidents, and HLD/LLD samples.
+
+
+!!! note "Certifications change"
+    Microsoft retired AZ-500, AZ-800/801 and AI-102 in 2026 (replaced by SC-500, AZ-802 and AI-103); Terraform Associate moved to version 004 in January 2026. Always check the vendor's page before booking.
