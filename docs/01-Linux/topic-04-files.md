@@ -1,6 +1,6 @@
 # Topic 4: Files & Directories
 
-**Status:** in progress · Parts A–F done, Part G (vi) and Incidents 3–6 next · **Focus:** Red Hat family
+**Status:** in progress · Parts A–F done, Incidents 1–5 done; Incident 6 and Part G (vi) next · **Focus:** Red Hat family
 
 !!! tip "How to use this page"
     Each part: concept → syntax → examples → production use → mistakes. Incidents follow the [root cause guide](../ROOT-CAUSE-GUIDE.md).
@@ -194,8 +194,23 @@ NAME (in a folder) ──▶ INODE (#33694106: owner, perms, size, times, data l
     **Fix:** kept `web.conf.broken` as evidence, restored from the dated backup, verified `port=8080`.
     **Prevention:** `cp -i` for configs, check FROM/TO before Enter, always make a dated backup before changes.
 
-!!! note "INC-011 · Disk filling with old logs (in progress)"
-    Ticket: delete shop logs older than 7 days, keep recent ones. Next step: list with `find … -mtime +7` before deleting.
+!!! danger "INC-011 · Disk filling with old logs (live)"
+    **Evidence:** `ls -l` showed logs from Sep 10, 15, 18; `find … -mtime +7` listed exactly those three.
+    **Root cause:** the shop's log folder had no retention policy (no log rotation), so a new log was written daily and none were ever removed.
+    **Fix:** listed first, deleted with `rm -i` and full paths, verified the two recent logs remained.
+    **Prevention:** log rotation with 7-day retention (Topic 24), disk alert at ~80%. **Senior check:** confirm the audit/compliance retention requirement before deleting.
+
+!!! danger "INC-012 · Checkout failed around 7:40 PM (live)"
+    **Evidence:** `16:42:10+0000 ERROR database connection refused (db01:5432)` → **7:42:10 PM KSA**; `16:44:30 INFO database connection restored` → 7:44:30 PM; `16:45:02 INFO order 1006 created` → proof it works.
+    **Finding:** the shop lost its database connection for ~2 min 20 s; order 1005 failed. Resolved.
+    **Next step:** the shop log shows the **effect**; the DB team checks db01 at 7:42 PM for the **cause**. Also noted: payment gateway slow at 7:35 PM.
+    **Lesson:** convert UTC → KSA (+3); a successful real transaction is stronger proof than "restored".
+
+!!! danger "INC-013 · Disk +300 MB, but ls shows nothing big (live)"
+    **Evidence:** `ls -l reports/tmp` → `total 0`; `find reports -type f -size +100M` → `reports/tmp/.cache/export-full.dat` (314,572,800 bytes).
+    **Root cause:** the report job left a full export in a **hidden** temp folder and never removed it; it went unnoticed because plain `ls` hides dot-folders.
+    **Fix:** owner confirmed; `rm -i`; the same `find` returned nothing.
+    **Prevention:** the job deletes its temp files; scheduled cleanup of `reports/tmp`; hunt with `find` or `ls -la`; disk alert.
 
 ---
 
@@ -208,6 +223,7 @@ NAME (in a folder) ──▶ INODE (#33694106: owner, perms, size, times, data l
 | `echo "text" file` without `>` | `echo` only prints; `>` saves |
 | `echo ""version 2"` | Quotes come in pairs; a bare `>` prompt means one is open, so press Ctrl+C |
 | `-name d` instead of `-type d` | `-name` matches names, `-type` matches kinds |
+| Plain `ls` "found nothing" | Dot-names are hidden; use `ls -la` or `find` |
 | `rm -rf config` scenario: "nothing is deleted" | A wrong relative path deletes something **else** |
 | Verified with `app.cong` instead of `app.log` | Verify with the app's **exact** command |
 

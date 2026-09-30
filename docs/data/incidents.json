@@ -108,5 +108,38 @@
     "root_cause": "An empty template (web.conf.new) was copied over the live web.conf (wrong direction, no -i), leaving it empty",
     "fix": "Kept web.conf.broken as evidence, restored from web.conf.bak-20260929, verified port=8080. Prevention: cp -i for configs, check FROM/TO, dated backups.",
     "page": "01-Linux/topic-04-files.md"
+  },
+  {
+    "id": "INC-011",
+    "date": "2026-09-30",
+    "module": "Linux",
+    "topic": "Files (delete)",
+    "type": "live",
+    "symptom": "Disk almost full; shop logs accumulating daily",
+    "root_cause": "No retention policy / log rotation for shop/logs, so daily logs were never removed",
+    "fix": "Listed with find -mtime +7, deleted the 3 old logs with rm -i full paths, verified recent logs kept. Prevention: logrotate with 7-day retention, disk alert at ~80%, confirm compliance retention before deleting.",
+    "page": "01-Linux/topic-04-files.md"
+  },
+  {
+    "id": "INC-012",
+    "date": "2026-09-30",
+    "module": "Linux",
+    "topic": "Files (read logs)",
+    "type": "live",
+    "symptom": "Checkout failed around 7:40–7:45 PM KSA",
+    "root_cause": "Shop lost its database connection (db01:5432) 19:42:10–19:44:30 KSA; order 1005 failed. Underlying cause lies on db01 (to be investigated by DB team).",
+    "fix": "Confirmed recovery: 'database connection restored' 19:44:30 and order 1006 succeeded 19:45:02 KSA. Converted UTC→KSA (+3).",
+    "page": "01-Linux/topic-04-files.md"
+  },
+  {
+    "id": "INC-013",
+    "date": "2026-09-30",
+    "module": "Linux",
+    "topic": "Files (find)",
+    "type": "live",
+    "symptom": "Disk usage +300 MB overnight; team's ls found nothing big",
+    "root_cause": "Report job left a full export in a hidden temp folder (reports/tmp/.cache) and never removed it; plain ls hides dot-folders so it went unnoticed",
+    "fix": "find -size +100M located it; owner confirmed; rm -i; same find returned nothing. Prevention: job cleans its temp files, scheduled cleanup, use find / ls -la, disk alert.",
+    "page": "01-Linux/topic-04-files.md"
   }
 ]
