@@ -1,4 +1,10 @@
-# Roadmap (recalibrated 30 Sep 2026)
+# Learning Plan (phases, no fixed dates)
+
+Part of the [4-Year Career Roadmap](CAREER-ROADMAP.md). The order below stays; dates are not fixed. **Current: Phase 1, the Linux sprint (from 1 October).**
+
+<!-- previous dated version kept below for reference -->
+
+## Previous dated draft (30 Sep 2026)
 
 **Goal:** interview-ready **Senior Cloud Engineer** by **end of March 2027**; applications from April, interviews from **May 2027**.
 **Needs:** about **18–20 hours/week** (current pace ~10.5). Sessions of 60–75 minutes on weeknights, longer on weekends.

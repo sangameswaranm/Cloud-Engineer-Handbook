@@ -4,7 +4,7 @@
   "current": {
     "month": 1,
     "week": 1,
-    "next_session": "Session 7 — fun recap, Incident 6 (broken current link), then Part G: vi"
+    "next_session": "Linux sprint (from 1 Oct): Incident 6, vi, then Users & Groups"
   },
   "domains": [
     {
@@ -210,34 +210,34 @@
   "months": [
     {
       "n": 1,
-      "title": "Oct · Linux core",
-      "focus": "Linux essentials, Bash basics"
+      "title": "Phase 1 · Linux",
+      "focus": "Linux core sprint, Bash basics"
     },
     {
       "n": 2,
-      "title": "Nov · Network + OCI",
-      "focus": "Networking concepts, OCI deep dive, Bash, OCI cert"
+      "title": "Phase 2 · Network + OCI",
+      "focus": "Networking concepts, OCI deep dive, storage"
     },
     {
       "n": 3,
-      "title": "Dec · Azure + Windows",
-      "focus": "AZ-104 syllabus, Windows Server, AD, Terraform basics"
+      "title": "Phase 3 · Azure + Windows",
+      "focus": "Azure (AZ-104), Windows Server, AD, Terraform basics"
     },
     {
       "n": 4,
-      "title": "Jan · IaC + CI/CD",
-      "focus": "Terraform, Docker, Git, GitHub Actions, AZ-104 exam"
+      "title": "Phase 4 · IaC + CI/CD",
+      "focus": "Terraform, Docker, Git, GitHub Actions"
     },
     {
       "n": 5,
-      "title": "Feb · K8s + Ops",
-      "focus": "Kubernetes, GitOps, monitoring, Veeam backup, Terraform cert"
+      "title": "Phase 5 · K8s + Ops",
+      "focus": "Kubernetes, GitOps, monitoring, Veeam"
     },
     {
       "n": 6,
-      "title": "Mar · AI + Security",
-      "focus": "Python, AI agents, Defender/Trend Micro, Exchange, DR, mock interviews"
+      "title": "Phase 6 · AI + Security",
+      "focus": "Python, AI agents, endpoint security, Exchange, DR"
     }
   ],
-  "goal": "Interview-ready Senior Cloud Engineer by end of March 2027; interviews from May 2027"
+  "goal": "Senior Infra / Infrastructure or Solution Architect within 4 years (by 2030); learning program without fixed dates"
 }
