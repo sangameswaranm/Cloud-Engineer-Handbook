@@ -160,5 +160,38 @@
     "minutes": 15,
     "result": "Topic 4 Parts D–F done",
     "notes": "Stopwatch total 1:35:30. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-30",
+    "start": "22:08",
+    "session": "S06",
+    "domain": "Linux",
+    "topic": "Topic 4 break/fix: INC-011 old logs, INC-012 checkout DB outage, INC-013 hidden 300 MB file",
+    "category": "theory",
+    "minutes": 10,
+    "result": "Incidents 3–5 closed",
+    "notes": "Stopwatch total 1:05:20. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-30",
+    "start": "22:08",
+    "session": "S06",
+    "domain": "Linux",
+    "topic": "Topic 4 break/fix: INC-011 old logs, INC-012 checkout DB outage, INC-013 hidden 300 MB file",
+    "category": "lab",
+    "minutes": 30,
+    "result": "Incidents 3–5 closed",
+    "notes": "Stopwatch total 1:05:20. Category split estimated from session content."
+  },
+  {
+    "date": "2026-09-30",
+    "start": "22:08",
+    "session": "S06",
+    "domain": "Linux",
+    "topic": "Topic 4 break/fix: INC-011 old logs, INC-012 checkout DB outage, INC-013 hidden 300 MB file",
+    "category": "troubleshooting",
+    "minutes": 25,
+    "result": "Incidents 3–5 closed",
+    "notes": "Stopwatch total 1:05:20. Category split estimated from session content."
   }
 ]
