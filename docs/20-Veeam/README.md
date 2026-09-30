@@ -1,8 +1,8 @@
-# Backup & DR
+# Backup Administration (Veeam)
 
 **Status:** Not Started · **Phase 5**
 
-RPO/RTO, backup types, enterprise backup, application-consistent backups, DR patterns, failover/failback, DR testing.
+Architecture, jobs, restores, backup copy and replication, ransomware resilience (immutability, SureBackup).
 
 ## Certifications
 
@@ -16,12 +16,10 @@ RPO/RTO, backup types, enterprise backup, application-consistent backups, DR pat
 ### :material-book-open-variant: Official documentation
 
 - [Veeam Help Center](https://helpcenter.veeam.com/)
-- [OCI Full Stack Disaster Recovery](https://docs.oracle.com/en-us/iaas/disaster-recovery/index.html)
 
 ### :material-youtube: Video courses
 
-- [Veeam Backup & Replication tutorial](https://www.youtube.com/results?search_query=Veeam+Backup+and+Replication+tutorial)
-- [RPO vs RTO explained](https://www.youtube.com/results?search_query=RPO+vs+RTO+explained+disaster+recovery)
+- [Veeam Backup & Replication full tutorial](https://www.youtube.com/results?search_query=Veeam+Backup+and+Replication+full+tutorial)
 
 ## Study guides
 

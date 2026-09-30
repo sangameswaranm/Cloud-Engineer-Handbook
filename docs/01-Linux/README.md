@@ -2,7 +2,10 @@
 
 **Status:** In Progress. Topics 1–2 complete (Session 01).
 
-**Focus:** Red Hat family (RHEL, Oracle Linux, Rocky, Alma).
+**Focus:** Red Hat family (RHEL, Oracle Linux, Rocky, Alma) · **Phase 1** · **Certification target:** RHCSA
+
+!!! tip "Start here"
+    Read the study guides in order, then use [Learning Resources per Topic](resources.md) for official docs, man pages and videos on every topic.
 
 ## Study guides
 

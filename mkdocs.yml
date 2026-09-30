@@ -22,6 +22,12 @@ theme:
     text: IBM Plex Sans
     code: IBM Plex Mono
   features:
+    - navigation.indexes
+    - navigation.path
+    - navigation.tracking
+    - toc.follow
+    - search.suggest
+    - search.share
     - navigation.tabs
     - navigation.footer
     - navigation.sections
@@ -37,6 +43,15 @@ plugins:
       enable_creation_date: false
       fallback_to_build_date: true
 
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sangameswaranm/Cloud-Engineer-Handbook
+      name: Source on GitHub
+  generator: false
+
+copyright: Sangamesh · Cloud Engineer Handbook · public learning notes, sanitized
+
 hooks:
   - hooks/progress_table.py
 
@@ -48,9 +63,6 @@ extra_javascript:
   - assets/gate.js
   - assets/dashboard.js
   - assets/site.js
-
-not_in_nav: |
-  data/README.md
 
 markdown_extensions:
   - attr_list
@@ -66,61 +78,75 @@ markdown_extensions:
   - toc:
       permalink: true
 
+not_in_nav: |
+  data/README.md
+
 nav:
   - Home: index.md
   - Dashboard: dashboard.md
+  - Learn:
+      - learn/index.md
+      - Linux:
+          - 01-Linux/README.md
+          - Study guides:
+              - "1 · Introduction": 01-Linux/topic-01-introduction.md
+              - "2 · Architecture": 01-Linux/topic-02-architecture.md
+              - "3 · Filesystem": 01-Linux/topic-03-filesystem.md
+              - "4 · Files & Directories": 01-Linux/topic-04-files.md
+          - Sessions:
+              - "Session 01": 01-Linux/session-01-intro-architecture.md
+          - Resources per topic: 01-Linux/resources.md
+      - "Networking": 02-Networking/README.md
+      - "Bash": 03-Bash/README.md
+      - "Python": 04-Python/README.md
+      - "Storage": 05-Storage/README.md
+      - "Database": 06-Database/README.md
+      - "IAM & Security": 07-IAM-Security/README.md
+      - "OCI": 08-OCI/README.md
+      - "Azure": 09-Azure/README.md
+      - "Terraform": 10-Terraform/README.md
+      - "Docker": 11-Docker/README.md
+      - "Kubernetes": 12-Kubernetes/README.md
+      - "Monitoring": 13-Monitoring/README.md
+      - "Logging": 14-Logging/README.md
+      - "CI/CD": 15-CICD/README.md
+      - "Backup & DR": 16-Backup-DR/README.md
+      - "Automation": 17-Automation/README.md
+      - "Architecture": 18-Architecture/README.md
+      - "Windows Server & AD": 19-Windows-AD/README.md
+      - "Backup Administration (Veeam)": 20-Veeam/README.md
+      - "Endpoint Security": 21-Endpoint-Security/README.md
+      - "AI for Ops": 22-AI-Ops/README.md
   - Troubleshooting: TROUBLESHOOTING.md
+  - Resources:
+      - Resources Hub: RESOURCES.md
+      - Practice Arenas: PRACTICE-ARENAS.md
+      - References: references/official-documentation.md
   - Program:
       - Career Roadmap (4 years): CAREER-ROADMAP.md
       - Learning Plan: ROADMAP.md
       - Knowledge + Task Map: KNOWLEDGE-MAP.md
       - Teaching Method: METHOD.md
       - Root Cause Guide: ROOT-CAUSE-GUIDE.md
-      - Practice Arenas: PRACTICE-ARENAS.md
       - Progress: PROGRESS.md
       - Daily Log: DAILY-LOG.md
       - Decisions: DECISIONS.md
       - Lab Environment: LAB-ENVIRONMENT.md
       - Cost Control: COST-CONTROL.md
-  - Topics:
-      - Linux:
-          - Overview: 01-Linux/README.md
-          - "Topic 1: Introduction": 01-Linux/topic-01-introduction.md
-          - "Topic 2: Architecture": 01-Linux/topic-02-architecture.md
-          - "Topic 3: Filesystem": 01-Linux/topic-03-filesystem.md
-          - "Topic 4: Files & Directories": 01-Linux/topic-04-files.md
-          - Session 01 Intro & Architecture: 01-Linux/session-01-intro-architecture.md
-      - Networking: 02-Networking/README.md
-      - Bash: 03-Bash/README.md
-      - Python: 04-Python/README.md
-      - Storage: 05-Storage/README.md
-      - Database: 06-Database/README.md
-      - IAM / Security: 07-IAM-Security/README.md
-      - OCI: 08-OCI/README.md
-      - Azure: 09-Azure/README.md
-      - Terraform: 10-Terraform/README.md
-      - Docker: 11-Docker/README.md
-      - Kubernetes: 12-Kubernetes/README.md
-      - Monitoring: 13-Monitoring/README.md
-      - Logging: 14-Logging/README.md
-      - CI/CD: 15-CICD/README.md
-      - Backup / DR: 16-Backup-DR/README.md
-      - Automation: 17-Automation/README.md
-      - Architecture: 18-Architecture/README.md
-  - Projects:
-      - 01 Linux Server: projects/01-linux-server/README.md
-      - 02 Network: projects/02-network/README.md
-      - 03 Storage: projects/03-storage/README.md
-      - 04 Database: projects/04-database/README.md
-      - 05 Security: projects/05-security/README.md
-      - 06 OCI: projects/06-oci/README.md
-      - 07 Azure: projects/07-azure/README.md
-      - 08 Terraform: projects/08-terraform/README.md
-      - 09 Docker: projects/09-docker/README.md
-      - 10 Kubernetes: projects/10-kubernetes/README.md
-      - 11 Monitoring: projects/11-monitoring/README.md
-      - 12 CI/CD: projects/12-cicd/README.md
-      - 13 Backup / DR: projects/13-backup-dr/README.md
-      - 14 Multi-Cloud: projects/14-multi-cloud/README.md
-      - 15 Final Enterprise: projects/15-final-enterprise/README.md
-  - References: references/official-documentation.md
+      - Projects:
+          - projects/index.md
+          - "01-linux-server": projects/01-linux-server/README.md
+          - "02-network": projects/02-network/README.md
+          - "03-storage": projects/03-storage/README.md
+          - "04-database": projects/04-database/README.md
+          - "05-security": projects/05-security/README.md
+          - "06-oci": projects/06-oci/README.md
+          - "07-azure": projects/07-azure/README.md
+          - "08-terraform": projects/08-terraform/README.md
+          - "09-docker": projects/09-docker/README.md
+          - "10-kubernetes": projects/10-kubernetes/README.md
+          - "11-monitoring": projects/11-monitoring/README.md
+          - "12-cicd": projects/12-cicd/README.md
+          - "13-backup-dr": projects/13-backup-dr/README.md
+          - "14-multi-cloud": projects/14-multi-cloud/README.md
+          - "15-final-enterprise": projects/15-final-enterprise/README.md

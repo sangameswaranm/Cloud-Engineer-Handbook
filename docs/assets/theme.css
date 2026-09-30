@@ -36,3 +36,13 @@ html:not(.ceh-ok) body > *:not(#ceh-gate) { visibility: hidden !important; }
 [data-md-color-scheme="slate"] .ceh-gate-box button { color: #0f161d; }
 .ceh-gate-err { color: #d2463c; font-size: .75rem; min-height: 1rem; margin: .6rem 0 0; }
 #ceh-logout { margin-left: .4rem; font: inherit; font-size: .65rem; color: var(--md-primary-bg-color); background: transparent; border: 1px solid rgba(255,255,255,.35); border-radius: 6px; padding: .25rem .55rem; cursor: pointer; white-space: nowrap; }
+/* Professional polish */
+.md-header { box-shadow: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+.md-tabs { background: var(--md-primary-fg-color); }
+.md-typeset .grid.cards > ul > li { transition: border-color .15s ease, transform .15s ease; }
+.md-typeset .grid.cards > ul > li:hover { transform: translateY(-2px); }
+.md-typeset .grid.cards .lg { color: var(--ceh-accent); }
+.md-typeset h1 { font-size: 1.9em; }
+.md-typeset h2 { border-bottom: 1px solid var(--ceh-line); padding-bottom: .2em; }
+.md-typeset .admonition, .md-typeset details { border-radius: 10px; }
+.md-path { font-size: .62rem; }

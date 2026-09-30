@@ -1,12 +1,13 @@
-# Python
+# AI for Ops
 
 **Status:** Not Started · **Phase 6**
 
-Language basics, data (JSON/YAML/CSV), files and OS, errors and logging, CLI tools, REST APIs, cloud SDKs, testing.
+LLM APIs, prompt design for operations, agents and tools (MCP), safety, automating daily cloud work.
 
 ## Certifications
 
-- PCEP / PCAP (optional)
+- AI-103 (optional)
+- OCI Generative AI Professional (optional)
 
 ## Learning resources
 
@@ -15,12 +16,13 @@ Language basics, data (JSON/YAML/CSV), files and OS, errors and logging, CLI too
 
 ### :material-book-open-variant: Official documentation
 
-- [Python documentation](https://docs.python.org/3/)
+- [Claude documentation](https://docs.claude.com/)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ### :material-youtube: Video courses
 
-- [freeCodeCamp — Python for beginners](https://www.youtube.com/results?search_query=freeCodeCamp+Python+full+course+for+beginners)
-- [Python for DevOps / automation](https://www.youtube.com/results?search_query=python+for+devops+automation+tutorial)
+- [AI agents for DevOps / cloud operations](https://www.youtube.com/results?search_query=AI+agents+for+DevOps+automation)
+- [Model Context Protocol explained](https://www.youtube.com/results?search_query=Model+Context+Protocol+explained)
 
 ## Study guides
 

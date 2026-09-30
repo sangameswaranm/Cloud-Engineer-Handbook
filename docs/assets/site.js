@@ -41,7 +41,7 @@
       const mins = S.reduce((a, x) => a + (Number(x.minutes) || 0), 0);
       let current = "Linux, topic 1";
       if (cov && cov.modules) for (const [m, rows] of Object.entries(cov.modules)) { const r = rows.find((x) => x.assessment !== "done"); if (r) { current = m + ": " + r.n + ". " + r.topic; break; } }
-      const items = [["Hours logged", (Math.round(mins / 6) / 10).toString()], ["Sessions", String(new Set(S.map((x) => x.issue || x.session + "|" + x.date)).size)], ["Now studying", current], ["Month", String((p.current || {}).month || 1) + " of 6"]];
+      const items = [["Hours logged", (Math.round(mins / 6) / 10).toString()], ["Sessions", String(new Set(S.map((x) => x.issue || x.session + "|" + x.date)).size)], ["Now studying", current], ["Phase", String((p.current || {}).month || 1) + " of 6"]];
       const box = $("ceh-home");
       items.forEach(([k, v]) => { const d = el("div", "ceh-home-item"); d.appendChild(el("span", "ceh-home-v", v)); d.appendChild(el("span", "ceh-home-k", k)); box.appendChild(d); });
     }).catch(() => {});
