@@ -23,7 +23,7 @@
       "troubleshooting": "Not Started",
       "project": "Not Started",
       "status": "Not Started",
-      "month": 1
+      "month": 2
     },
     {
       "name": "Bash",
@@ -41,7 +41,7 @@
       "troubleshooting": "Not Started",
       "project": "Not Started",
       "status": "Not Started",
-      "month": 2
+      "month": 6
     },
     {
       "name": "Storage",
@@ -59,7 +59,7 @@
       "troubleshooting": "Not Started",
       "project": "Not Started",
       "status": "Not Started",
-      "month": 2
+      "month": 5
     },
     {
       "name": "IAM/Security",
@@ -68,7 +68,7 @@
       "troubleshooting": "Not Started",
       "project": "Not Started",
       "status": "Not Started",
-      "month": 2
+      "month": 3
     },
     {
       "name": "OCI",
@@ -77,7 +77,7 @@
       "troubleshooting": "Not Started",
       "project": "Not Started",
       "status": "Not Started",
-      "month": 1
+      "month": 2
     },
     {
       "name": "Azure",
@@ -113,7 +113,7 @@
       "troubleshooting": "Not Started",
       "project": "Not Started",
       "status": "Not Started",
-      "month": 4
+      "month": 5
     },
     {
       "name": "Monitoring",
@@ -140,7 +140,7 @@
       "troubleshooting": "Not Started",
       "project": "Not Started",
       "status": "Not Started",
-      "month": 5
+      "month": 4
     },
     {
       "name": "Backup/DR",
@@ -168,6 +168,33 @@
       "project": "Not Started",
       "status": "Not Started",
       "month": 6
+    },
+    {
+      "name": "Windows Server & AD",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 3
+    },
+    {
+      "name": "Endpoint Security",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 6
+    },
+    {
+      "name": "AI for Ops",
+      "theory": "Not Started",
+      "labs": "Not Started",
+      "troubleshooting": "Not Started",
+      "project": "Not Started",
+      "status": "Not Started",
+      "month": 6
     }
   ],
   "weak_areas": [
@@ -183,33 +210,34 @@
   "months": [
     {
       "n": 1,
-      "title": "Calibration",
-      "focus": "Linux, networking, Bash, OCI networking"
+      "title": "Oct · Linux core",
+      "focus": "Linux essentials, Bash basics"
     },
     {
       "n": 2,
-      "title": "Platform basics",
-      "focus": "Storage, databases, IAM & security"
+      "title": "Nov · Network + OCI",
+      "focus": "Networking concepts, OCI deep dive, Bash, OCI cert"
     },
     {
       "n": 3,
-      "title": "OCI, then Azure",
-      "focus": "OCI deep dive, recreate in Azure"
+      "title": "Dec · Azure + Windows",
+      "focus": "AZ-104 syllabus, Windows Server, AD, Terraform basics"
     },
     {
       "n": 4,
-      "title": "Build as code",
-      "focus": "Terraform, Docker, Kubernetes"
+      "title": "Jan · IaC + CI/CD",
+      "focus": "Terraform, Docker, Git, GitHub Actions, AZ-104 exam"
     },
     {
       "n": 5,
-      "title": "Operate",
-      "focus": "Monitoring, logging, CI/CD, backup & DR"
+      "title": "Feb · K8s + Ops",
+      "focus": "Kubernetes, GitOps, monitoring, Veeam backup, Terraform cert"
     },
     {
       "n": 6,
-      "title": "Architect",
-      "focus": "Integration, final platform, handover"
+      "title": "Mar · AI + Security",
+      "focus": "Python, AI agents, Defender/Trend Micro, Exchange, DR, mock interviews"
     }
-  ]
+  ],
+  "goal": "Interview-ready Senior Cloud Engineer by end of March 2027; interviews from May 2027"
 }

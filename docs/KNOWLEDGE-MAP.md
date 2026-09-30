@@ -422,6 +422,51 @@ This is the plan, not progress. Progress is tracked per concept in each module's
 
 ---
 
+## 19. Windows Server & Active Directory
+
+| # | Topic | Concepts | Level |
+|---|---|---|---|
+| 1 | Windows Server basics | Roles and features, Server Manager, services, Event Viewer, Task Manager, RDP | F |
+| 2 | PowerShell | Cmdlets, pipeline, objects, remoting, scripts | F–I |
+| 3 | Active Directory | Domains, forests, OUs, users, groups, DCs, FSMO awareness | I |
+| 4 | Group Policy | GPO links, inheritance, precedence, gpupdate/gpresult | I |
+| 5 | AD DNS and DHCP | Integrated zones, SRV records, scopes | I |
+| 6 | Hybrid identity | Entra Connect/Cloud Sync, UPN, sync troubleshooting | I–A |
+| 7 | Patching | WSUS / Azure Update Manager | I |
+| 8 | IIS basics | Sites, bindings, certificates | F–I |
+| 9 | Exchange basics | Mail flow, mailboxes, Exchange Online vs on-prem, MX/SPF/DKIM/DMARC | F |
+
+**Tasks:** build a domain controller lab; join a server; OUs + GPO; fix a login failure caused by UPN/sync; patch a server; mail-flow troubleshooting walkthrough.
+
+---
+
+## 20. Backup Administration (Veeam)
+
+| # | Topic | Concepts | Level |
+|---|---|---|---|
+| 1 | Architecture | Backup server, proxies, repositories, scale-out repositories | I |
+| 2 | Jobs | Full/incremental, retention, schedules, application-aware processing | I |
+| 3 | Restores | File-level, instant VM recovery, application item restore | I–A |
+| 4 | Replication & copies | Backup copy jobs, 3-2-1 rule, offsite/cloud tiers | A |
+| 5 | Ransomware resilience | Immutability, hardened repositories, SureBackup verification | A |
+
+**Tasks:** Community Edition lab; back up and restore a VM and a file; a failed-job incident; map to RPO/RTO and to the DR architecture you already know.
+
+---
+
+## 21. Endpoint Security (Defender, Trend Micro)
+
+Agents and policies, alert triage, exclusions and their risks, quarantine/restore, agent health troubleshooting, Defender for Endpoint vs Defender for Cloud, Trend Micro Apex One / Vision One concepts. **Tasks:** onboard a server, investigate an alert, fix an unhealthy agent.
+
+---
+
+## 22. AI for Ops
+
+LLM APIs, prompt design for operations, agents and tools (MCP), safety (never auto-run destructive actions without approval).
+**Tasks:** log-to-incident-summary agent, daily OCI/Azure inventory and cost report, runbook assistant, AI-assisted Terraform review.
+
+---
+
 ## Final Enterprise Project
 
 ```text

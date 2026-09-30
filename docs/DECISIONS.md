@@ -13,3 +13,4 @@
 | D-09 | 2026-09-25 | Linux is taught distro-neutral, with commands for every major family | Skills must work on any Linux flavour, not one VM |
 | D-10 | 2026-09-25 | Lesson format locked (see Teaching Method) and full knowledge + task map adopted | One consistent, deep format for every topic |
 | D-11 | 2026-09-25 | Focus on the Red Hat family only (RHEL, Oracle Linux, Rocky, Alma) | Matches the servers used at work; Debian/Ubuntu differences dropped |
+| D-12 | 2026-09-30 | Recalibrated roadmap: interview-ready by end of March 2027, interviews from May; ~18–20 h/week; full depth on core, working knowledge elsewhere; added Windows Server & AD, Exchange basics, Veeam backup, Defender/Trend Micro, AI for ops; CI/CD explicit in Jan–Feb | Job-search goal and honest pace data from sessions S01–S06 |
