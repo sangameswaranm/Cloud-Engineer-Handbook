@@ -1,6 +1,20 @@
 # Learning Plan (phases, no fixed dates)
 
-Part of the [4-Year Career Roadmap](CAREER-ROADMAP.md). The order below stays; dates are not fixed. **Current: Phase 1, the Linux sprint (from 1 October).**
+Part of the [4-Year Career Roadmap](CAREER-ROADMAP.md). The **DevOps slice follows the 6-level skill hierarchy**
+(Linux/networking/Git → Docker → CI/CD → Kubernetes/Helm → Terraform → service mesh/GitOps/observability), wrapped with the
+infrastructure-architect layers (cloud platforms, Windows/AD, security, backup/DR, architecture).
+
+| Phase | Focus | DevOps level |
+|---|---|---|
+| **1 · Linux + Git** | Linux (sprint), Bash, **Git basics** | Level 1 |
+| **2 · Network + OCI** | Networking concepts, OCI deep dive, storage | Level 1 |
+| **3 · Azure + Windows** | Azure (AZ-104), Windows Server, Active Directory, IAM, databases | — (infra layer) |
+| **4 · Docker + CI/CD** | Docker, Docker Compose, **GitHub Actions** pipelines | Levels 2–3 |
+| **5 · K8s + Terraform** | Kubernetes (OKE/AKS), **Helm**, Terraform | Levels 4–5 |
+| **6 · Mesh + GitOps + Observability** | **Service mesh** (Istio/Linkerd), Argo CD, Prometheus/Grafana, logging | Level 6 |
+| **7 · Architect layer** | Veeam backup, DR architecture, endpoint security, Exchange basics, Python, **AI agents**, architecture | — (architect layer) |
+
+**Current:** Phase 1, the Linux sprint.
 
 <!-- previous dated version kept below for reference -->
 

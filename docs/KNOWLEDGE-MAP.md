@@ -306,6 +306,7 @@ This is the plan, not progress. Progress is tracked per concept in each module's
 | 9 | Packaging | Helm | I |
 | 10 | Managed K8s | OKE, AKS, node pools, upgrades | A |
 | 11 | Troubleshooting | CrashLoopBackOff, Pending, ImagePullBackOff, node NotReady, CNI/IP issues | A |
+| 12 | Service mesh | Why a mesh, sidecar vs ambient, Istio/Linkerd, mTLS between services, traffic splitting (canary), retries/timeouts, mesh observability | A–E |
 
 **Tasks:** deploy an app with Service and Ingress; rolling update and rollback; probes; HPA under load; RBAC for a team; NetworkPolicy isolation; "Pod Running but unreachable"; node registration failure; pod IP exhaustion.
 
@@ -353,7 +354,7 @@ This is the plan, not progress. Progress is tracked per concept in each module's
 
 | # | Topic | Concepts | Level |
 |---|---|---|---|
-| 1 | Git | Commits, branches, merges, rebase, PRs, tags | F–I |
+| 1 | Git | Commits, branches, merges, rebase, PRs, tags (basics start in Phase 1) | F–I |
 | 2 | CI concepts | Build, test, artifacts, caching | I |
 | 3 | GitHub Actions | Workflows, jobs, secrets, environments | I |
 | 4 | Jenkins | Pipelines, agents (awareness) | I |
