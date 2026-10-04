@@ -1,6 +1,6 @@
 # Topic 4: Files & Directories
 
-**Status:** in progress · Parts A–F done, Incidents 1–5 done; Incident 6 and Part G (vi) next · **Focus:** Red Hat family
+**Status:** in progress · Parts A–F and all six incidents done; Part G (vi) next · **Focus:** Red Hat family
 
 !!! tip "How to use this page"
     Each part: concept → syntax → examples → production use → mistakes. Incidents follow the [root cause guide](../ROOT-CAUSE-GUIDE.md).
@@ -218,6 +218,12 @@ NAME (in a folder) ──▶ INODE (#33694106: owner, perms, size, times, data l
     **Impact:** none, because the session was kept open and it was caught before any SSH restart. Otherwise the next restart/reboot would have **locked everyone out**.
     **Fix:** `mv` back to `sshd_config`; backup with `sudo cp -p … sshd_config.bak-20261004`; `sudo sshd -t` (no output = valid); new SSH login confirmed.
     **Prevention:** backups with `cp -p`, never `mv`; copy-paste critical paths; `sshd -t` before any SSH restart; keep one session open until a new login works.
+
+!!! danger "INC-015 · App down after deployment: broken 'current' link (live)"
+    **Evidence:** `ls -l shopapp` → `current -> …/releases/v3`; `ls releases` → only `v1 v2`.
+    **Root cause:** the deployment switched the `current` symlink to `v3`, a release that was never deployed, so the link pointed at nothing.
+    **Fix:** `rm shopapp/current` (no trailing `/`), `ln -s …/releases/v2 shopapp/current`; verified `version=2`.
+    **Prevention:** the deployment checks the target folder exists **before** switching `current`, then verifies the app; rollback = re-point `current` to the previous release.
 
 ---
 

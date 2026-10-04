@@ -152,5 +152,16 @@
     "root_cause": "Backup made with mv instead of cp -p, moving the live SSH config away; the restore then used a one-character typo (sshd.config instead of sshd_config)",
     "fix": "Renamed back to sshd_config, proper backup with cp -p (sshd_config.bak-20261004), validated with sshd -t, confirmed with a new SSH login while keeping the old session open. Prevention: cp -p for backups, copy-paste critical paths, sshd -t before any restart, keep a session open until a new login works.",
     "page": "01-Linux/topic-04-files.md"
+  },
+  {
+    "id": "INC-015",
+    "date": "2026-10-04",
+    "module": "Linux",
+    "topic": "Files (links)",
+    "type": "live",
+    "symptom": "App won't start after deployment: cannot read current/app.conf: No such file or directory",
+    "root_cause": "The deployment pointed the 'current' symlink at releases/v3, which was never deployed; the link was broken",
+    "fix": "rm current (no trailing slash) and ln -s releases/v2 current; verified version=2. Prevention: deployment checks the target exists before switching, then verifies the app.",
+    "page": "01-Linux/topic-04-files.md"
   }
 ]
