@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-30",
+  "updated": "2026-10-04",
   "program_start": "2026-09-25",
   "current": {
     "month": 1,
     "week": 1,
-    "next_session": "Linux sprint (from 1 Oct): Incident 6, vi, then Users & Groups"
+    "next_session": "Session 8 — Topic 4 interview check, Mini Project 1 (Server Baseline Report), then Topic 5: Users & Groups"
   },
   "domains": [
     {
@@ -205,7 +205,9 @@
     "Relative paths in cp/mv: FROM and TO both count from where you stand (check pwd first)",
     "rm safety: a wrong relative path deletes something ELSE, and rm -rf never warns — use pwd, ls, absolute paths",
     "echo without > only prints; echo \"text\" > file saves (missed twice)",
-    "Quotes must be in pairs: an odd number leaves a > prompt waiting (happened twice)"
+    "Quotes must be in pairs: an odd number leaves a > prompt waiting (happened twice)",
+    "Exact names: one character or letter case changes the file (sshd.config vs sshd_config, Hello.txt vs hello.txt, .conf vs .config) — use Tab",
+    "Backups are cp -p, never mv (INC-014)"
   ],
   "months": [
     {

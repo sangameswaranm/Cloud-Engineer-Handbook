@@ -193,5 +193,35 @@
     "minutes": 25,
     "result": "Incidents 3–5 closed",
     "notes": "Stopwatch total 1:05:20. Category split estimated from session content."
+  },
+  {
+    "date": "2026-10-04",
+    "session": "S07",
+    "domain": "Linux",
+    "topic": "Recap + speed round; INC-014 real sshd_config recovery; INC-015 broken current link; Part G vi",
+    "category": "theory",
+    "minutes": 10,
+    "result": "Topic 4 Parts A–G done",
+    "notes": "Stopwatch total 0:58:02. Category split estimated from session content."
+  },
+  {
+    "date": "2026-10-04",
+    "session": "S07",
+    "domain": "Linux",
+    "topic": "Recap + speed round; INC-014 real sshd_config recovery; INC-015 broken current link; Part G vi",
+    "category": "lab",
+    "minutes": 30,
+    "result": "Topic 4 Parts A–G done",
+    "notes": "Stopwatch total 0:58:02. Category split estimated from session content."
+  },
+  {
+    "date": "2026-10-04",
+    "session": "S07",
+    "domain": "Linux",
+    "topic": "Recap + speed round; INC-014 real sshd_config recovery; INC-015 broken current link; Part G vi",
+    "category": "troubleshooting",
+    "minutes": 18,
+    "result": "Topic 4 Parts A–G done",
+    "notes": "Stopwatch total 0:58:02. Category split estimated from session content."
   }
 ]

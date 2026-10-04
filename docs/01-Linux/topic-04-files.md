@@ -1,6 +1,6 @@
 # Topic 4: Files & Directories
 
-**Status:** in progress · Parts A–F and all six incidents done; Part G (vi) next · **Focus:** Red Hat family
+**Status:** Parts A–G and all incidents done · interview check and Mini Project 1 next · **Focus:** Red Hat family
 
 !!! tip "How to use this page"
     Each part: concept → syntax → examples → production use → mistakes. Incidents follow the [root cause guide](../ROOT-CAUSE-GUIDE.md).
@@ -166,6 +166,43 @@ NAME (in a folder) ──▶ INODE (#33694106: owner, perms, size, times, data l
 
 **Production uses of soft links:** `/bin -> usr/bin`, `yum.conf -> dnf/dnf.conf`, `/usr/bin/dnf -> dnf-3`,
 `/opt/app/current -> releases/v2` (instant rollback by re-pointing `current`).
+
+---
+
+## Part G: The vi editor
+
+`vi` (on RHEL: `vim`) is on every Linux server: the editor you use over SSH.
+
+```text
+           i                         Esc
+NORMAL  ───────▶  INSERT      ───────────────▶  NORMAL
+(commands)        (typing)                      : at the bottom = save / quit / settings
+```
+
+| Key (NORMAL mode) | Does |
+|---|---|
+| `i` / `Esc` | start typing / stop typing (when confused: `Esc`) |
+| `:w` · `:wq` · `:q!` | save · save and quit · quit **without** saving |
+| `x` · `dd` · `u` · `o` | delete character · delete line · undo · new line below |
+| `/word` then `n` | search (case-sensitive) and next match; `:set ignorecase` to ignore case |
+| `:set number` | line numbers |
+| `G` · `gg` | bottom · top |
+
+**Lessons from the lab**
+
+- `~` lines on an empty screen = the file is **empty or new**: you probably opened the wrong name (`.conf` vs `.config`). Use Tab.
+- In `sshd_config`, lines starting with `#` are **comments** showing defaults (e.g. `#PermitRootLogin prohibit-password`, line 40).
+- `Include /etc/ssh/sshd_config.d/*.conf` (line 15) pulls in drop-in files that can **override** the main file. If a change "does nothing", check that folder.
+
+**Senior workflow for editing a production config**
+
+```text
+1. sudo cp -p file file.bak-DATE     backup first (cp, never mv)
+2. sudo vi file                      edit
+3. sudo sshd -t                      test (for SSH)
+4. restart the service               (Topic 10)
+5. log in from a NEW window          before closing the old one
+```
 
 ---
 

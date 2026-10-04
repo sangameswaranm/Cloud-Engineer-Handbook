@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-25",
+ "updated": "2026-10-04",
  "stages": [
   "theory",
   "basic",
@@ -57,11 +57,11 @@
     "n": 4,
     "topic": "Files & Directories",
     "level": "F",
-    "theory": "in-progress",
-    "basic": "in-progress",
-    "intermediate": "not-started",
-    "advanced": "not-started",
-    "troubleshooting": "not-started",
+    "theory": "done",
+    "basic": "done",
+    "intermediate": "done",
+    "advanced": "in-progress",
+    "troubleshooting": "done",
     "project": "not-started",
     "assessment": "not-started"
    },
