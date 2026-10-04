@@ -141,5 +141,16 @@
     "root_cause": "Report job left a full export in a hidden temp folder (reports/tmp/.cache) and never removed it; plain ls hides dot-folders so it went unnoticed",
     "fix": "find -size +100M located it; owner confirmed; rm -i; same find returned nothing. Prevention: job cleans its temp files, scheduled cleanup, use find / ls -la, disk alert.",
     "page": "01-Linux/topic-04-files.md"
+  },
+  {
+    "id": "INC-014",
+    "date": "2026-10-04",
+    "module": "Linux",
+    "topic": "Files (copy/move)",
+    "type": "live",
+    "symptom": "After a 'backup', /etc/ssh/sshd_config was missing; sshd -t: No such file or directory",
+    "root_cause": "Backup made with mv instead of cp -p, moving the live SSH config away; the restore then used a one-character typo (sshd.config instead of sshd_config)",
+    "fix": "Renamed back to sshd_config, proper backup with cp -p (sshd_config.bak-20261004), validated with sshd -t, confirmed with a new SSH login while keeping the old session open. Prevention: cp -p for backups, copy-paste critical paths, sshd -t before any restart, keep a session open until a new login works.",
+    "page": "01-Linux/topic-04-files.md"
   }
 ]

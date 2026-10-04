@@ -212,6 +212,13 @@ NAME (in a folder) ──▶ INODE (#33694106: owner, perms, size, times, data l
     **Fix:** owner confirmed; `rm -i`; the same `find` returned nothing.
     **Prevention:** the job deletes its temp files; scheduled cleanup of `reports/tmp`; hunt with `find` or `ls -la`; disk alert.
 
+!!! danger "INC-014 · SSH server config missing after a 'backup' (live, real server)"
+    **Evidence:** `ls -la /etc/ssh` showed only `sshd_config.bak_oct042026`; later `sshd -t` → `/etc/ssh/sshd_config: No such file or directory`.
+    **Root cause:** the backup was made with **`mv`** instead of **`cp -p`**, moving the live config away; the restore then had a one-character typo (`sshd.config` vs `sshd_config`).
+    **Impact:** none, because the session was kept open and it was caught before any SSH restart. Otherwise the next restart/reboot would have **locked everyone out**.
+    **Fix:** `mv` back to `sshd_config`; backup with `sudo cp -p … sshd_config.bak-20261004`; `sudo sshd -t` (no output = valid); new SSH login confirmed.
+    **Prevention:** backups with `cp -p`, never `mv`; copy-paste critical paths; `sshd -t` before any SSH restart; keep one session open until a new login works.
+
 ---
 
 ## Mistakes made while learning
@@ -224,6 +231,8 @@ NAME (in a folder) ──▶ INODE (#33694106: owner, perms, size, times, data l
 | `echo ""version 2"` | Quotes come in pairs; a bare `>` prompt means one is open, so press Ctrl+C |
 | `-name d` instead of `-type d` | `-name` matches names, `-type` matches kinds |
 | Plain `ls` "found nothing" | Dot-names are hidden; use `ls -la` or `find` |
+| Backed up sshd_config with `mv` | `mv` takes the original away; backups are `cp -p` |
+| `find -size +100mb` / `+100m` | Units are `k`, `M`, `G` (capital M for MB) |
 | `rm -rf config` scenario: "nothing is deleted" | A wrong relative path deletes something **else** |
 | Verified with `app.cong` instead of `app.log` | Verify with the app's **exact** command |
 
