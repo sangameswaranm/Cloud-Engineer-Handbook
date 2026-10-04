@@ -53,3 +53,4 @@ For every topic: the relevant **Red Hat Enterprise Linux 9 guide**, the **man pa
 - [:material-youtube: freeCodeCamp — Linux crash course for beginners](https://www.youtube.com/results?search_query=freeCodeCamp+Linux+Operating+System+Crash+Course+for+Beginners)
 - [:material-youtube: Learn Linux TV](https://www.youtube.com/results?search_query=Learn+Linux+TV)
 - [:material-youtube: Sander van Vugt — RHCSA](https://www.youtube.com/results?search_query=Sander+van+Vugt+RHCSA)
+- [:material-youtube: Abhishek Veeramalla — Linux course](https://www.youtube.com/results?search_query=Abhishek+Veeramalla+Linux+full+course) · revision notes: [ultimate-linux-guide on GitHub](https://github.com/iam-veeramalla/ultimate-linux-guide) (beginner level; covers topics 1–9 of our map plus networking and disk basics)
