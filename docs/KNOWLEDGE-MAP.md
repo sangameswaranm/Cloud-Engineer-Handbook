@@ -85,6 +85,7 @@ This is the plan, not progress. Progress is tracked per concept in each module's
 | 10 | DNS | Resolution flow, record types, TTL, zones, split-horizon, private DNS, DNSSEC awareness | I |
 | 11 | HTTP/HTTPS/TLS | Methods, status codes, headers, TLS handshake, certificates, chains, SNI, mTLS | I–A |
 | 12 | Load balancing | L4 vs L7, health checks, algorithms, session persistence, SSL offload | I |
+| 12b | CDN | Edge caching, origin, cache keys/TTL, TLS at the edge, OCI/Azure Front Door/CloudFront | I |
 | 13 | Proxies | Forward/reverse proxy, WAF | I |
 | 14 | Firewalls | Stateful vs stateless, zones, policies, NGFW, security lists vs NSGs | I |
 | 15 | VPN | IPSec (IKE phase 1/2, SAs, proxy IDs), route-based vs policy-based, SSL VPN | A |
@@ -176,6 +177,7 @@ This is the plan, not progress. Progress is tracked per concept in each module's
 | 7 | Performance | Indexes, EXPLAIN, vacuum, connection pooling | A |
 | 8 | Managed databases | Cloud managed PostgreSQL, trade-offs | I |
 | 9 | Awareness | Oracle, MySQL, SQL Server, Redis | E |
+| 10 | NoSQL vs SQL | Key-value, document, wide-column, graph; consistency trade-offs; when to choose which (OCI NoSQL, Cosmos DB, DynamoDB awareness) | I |
 
 **Tasks:** install, secure, and create app roles; fix "connection refused" vs "authentication failed"; backup and restore across versions; PITR recovery; set up a replica and measure lag; find and fix a slow query.
 
@@ -208,6 +210,7 @@ This is the plan, not progress. Progress is tracked per concept in each module's
 
 | # | Topic | Concepts | Level |
 |---|---|---|---|
+| 0 | Cloud concepts | IaaS / PaaS / SaaS, shared responsibility model, regions and availability, pay-as-you-go | F |
 | 1 | Foundations | Regions, ADs, fault domains, tenancy, compartments, limits/quotas | F |
 | 2 | IAM | Users, groups, dynamic groups, policies, instance principals | I |
 | 3 | Networking | VCN, subnets, route tables, security lists, NSGs, IGW, NAT, service gateway, DRG, peering, FastConnect/IPSec | I–A |
@@ -409,6 +412,7 @@ This is the plan, not progress. Progress is tracked per concept in each module's
 |---|---|---|---|
 | 1 | Requirements | Functional vs non-functional, constraints | F |
 | 2 | Design documents | HLD, LLD, diagrams, decision records | I |
+| 2b | APIs | REST basics (methods, status codes, auth), API Gateway (routing, rate limiting, auth, versioning), integration patterns | I |
 | 3 | Availability | HA, fault domains, redundancy, SPOFs | I–A |
 | 4 | Scalability & performance | Horizontal vs vertical, caching | A |
 | 5 | Security architecture | Zero trust, segmentation, identity-first | A |

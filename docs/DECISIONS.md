@@ -17,3 +17,4 @@
 | D-13 | 2026-09-30 | 4-year career roadmap to Infra/Solution Architect; learning plan kept as phases without fixed dates; Linux sprint from 1 Oct | Timeline depends on real pace; destination fixed, dates flexible |
 | D-14 | 2026-10-01 | Phase order follows the DevOps 6-level hierarchy (Git early; Docker → CI/CD → Kubernetes/Helm → Terraform → service mesh/GitOps/observability) inside the architect roadmap; service mesh added | Clear progression; each level builds on the previous one |
 | D-15 | 2026-10-01 | Revert D-14 ordering to infrastructure-first (Terraform in Phase 4, before Kubernetes); keep Git early and service mesh | Goal is infra/solution architect, not pure DevOps |
+| D-16 | 2026-10-01 | Added cloud concepts (IaaS/PaaS/SaaS, shared responsibility), APIs/API Gateway, CDN, NoSQL vs SQL inside existing modules; phase order unchanged | Gaps found against a cloud-skills checklist |
