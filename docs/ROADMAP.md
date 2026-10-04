@@ -1,18 +1,19 @@
 # Learning Plan (phases, no fixed dates)
 
-Part of the [4-Year Career Roadmap](CAREER-ROADMAP.md). The **DevOps slice follows the 6-level skill hierarchy**
-(Linux/networking/Git → Docker → CI/CD → Kubernetes/Helm → Terraform → service mesh/GitOps/observability), wrapped with the
-infrastructure-architect layers (cloud platforms, Windows/AD, security, backup/DR, architecture).
+Part of the [4-Year Career Roadmap](CAREER-ROADMAP.md). **Infrastructure-first order**: platforms and identity before DevOps tooling,
+and **Terraform early**, because infrastructure engineers build networks and servers as code long before Kubernetes.
 
-| Phase | Focus | DevOps level |
-|---|---|---|
-| **1 · Linux + Git** | Linux (sprint), Bash, **Git basics** | Level 1 |
-| **2 · Network + OCI** | Networking concepts, OCI deep dive, storage | Level 1 |
-| **3 · Azure + Windows** | Azure (AZ-104), Windows Server, Active Directory, IAM, databases | — (infra layer) |
-| **4 · Docker + CI/CD** | Docker, Docker Compose, **GitHub Actions** pipelines | Levels 2–3 |
-| **5 · K8s + Terraform** | Kubernetes (OKE/AKS), **Helm**, Terraform | Levels 4–5 |
-| **6 · Mesh + GitOps + Observability** | **Service mesh** (Istio/Linkerd), Argo CD, Prometheus/Grafana, logging | Level 6 |
-| **7 · Architect layer** | Veeam backup, DR architecture, endpoint security, Exchange basics, Python, **AI agents**, architecture | — (architect layer) |
+| Phase | Focus |
+|---|---|
+| **1 · Linux + Git** | Linux sprint, Bash, Git basics |
+| **2 · Network + OCI** | Networking concepts, OCI deep dive, storage |
+| **3 · Azure + Windows** | Azure (AZ-104), Windows Server, Active Directory, IAM, databases |
+| **4 · IaC + CI/CD** | Terraform, Docker, Docker Compose, GitHub Actions |
+| **5 · K8s + Ops** | Kubernetes (OKE/AKS), Helm, Argo CD (GitOps), **service mesh**, Prometheus/Grafana, logging |
+| **6 · Architect layer** | Veeam backup, DR architecture, endpoint security, Exchange basics, Python, AI agents, architecture |
+
+The DevOps skill hierarchy (Linux/Git → Docker → CI/CD → Kubernetes/Helm → Terraform → mesh/GitOps/observability) is fully covered
+across Phases 1, 4 and 5; only Terraform is placed earlier, to suit the infrastructure goal.
 
 **Current:** Phase 1, the Linux sprint.
 

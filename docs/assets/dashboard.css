@@ -41,7 +41,7 @@
 .ceh-hop-bar i { display: block; height: 100%; background: var(--ceh-accent); }
 .md-typeset .ceh-next { margin: .2rem 0 0; padding-top: .7rem; border-top: 1px solid var(--ceh-line); font-weight: 600; font-size: .74rem; }
 @media (min-width: 900px) {
-  .md-typeset ol.ceh-route { grid-template-columns: repeat(7, 1fr); }
+  .md-typeset ol.ceh-route { grid-template-columns: repeat(6, 1fr); }
   .ceh-hop { grid-template-columns: 1fr; padding: 0 .6rem 0 0; }
   .ceh-hop::before { left: 2rem; right: 0; top: calc(1rem - 1px); bottom: auto; border-left: 0; border-top: 2px dashed var(--ceh-line); }
   .ceh-hop.is-done::before { border-top-style: solid; }
